@@ -1,0 +1,131 @@
+/* ============================================================
+   EKRILNA — Responsive Styles
+   Mobile-first breakpoints
+   ============================================================ */
+
+/* ── Tablet (≤ 1024px) ───────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .solution-grid { grid-template-columns: repeat(2, 1fr); }
+  .testi-grid    { grid-template-columns: repeat(2, 1fr); }
+  .match-layout  { grid-template-columns: 1fr; gap: 2rem; text-align: center; }
+  .phone-mockup  { margin: 0 auto; }
+  .match-info p  { margin: 0 auto 2rem; }
+  .viz-layout    { grid-template-columns: 1fr; }
+  #apt-canvas    { height: 360px; }
+  .grid-4        { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ── Mobile (≤ 768px) ────────────────────────────────────────── */
+@media (max-width: 768px) {
+  :root {
+    --sp-2xl: 5rem;
+    --sp-xl:  3rem;
+  }
+
+  /* Navbar */
+  .nav-links   { display: none; }
+  .nav-cta     { display: none; }
+  .nav-hamburger { display: flex; }
+  .nav-logo    { font-size: 1.25rem; }
+
+  /* Hero */
+  .hero-ctas { flex-direction: column; align-items: center; }
+  .hero-ctas .btn { width: 100%; max-width: 320px; }
+
+  /* Problem */
+  .problem-grid { grid-template-columns: 1fr; }
+
+  /* Solution */
+  .solution-grid { grid-template-columns: 1fr; }
+  .solution-center-card { padding: 2rem; }
+
+  /* Map */
+  #map-section { height: auto; min-height: auto; padding: 0; }
+  #map-canvas  { height: 420px; position: relative; }
+  .map-ui.map-header { top: 1.5rem; }
+  .map-ui.map-controls { bottom: 1.5rem; }
+  .map-controls-inner { padding: 1rem 1.2rem; gap: 0.8rem; }
+  .transport-btns { gap: 0.4rem; }
+  .transport-btn { padding: 0.4rem 0.7rem; font-size: 0.75rem; }
+
+  /* Match */
+  .match-layout  { display: flex; flex-direction: column; gap: 2rem; }
+  .profile-card  { display: none; }
+  .profile-card:first-child { display: flex; }
+
+  /* Testimonials */
+  .testi-grid { grid-template-columns: 1fr; }
+
+  /* CTA */
+  .cta-stats { gap: 2rem; }
+  .cta-stat-num { font-size: 2.2rem; }
+
+  /* Partners carousel */
+  .partner-card { width: 240px; margin-left: -120px; height: 280px; }
+
+  /* Footer */
+  .footer-inner { flex-direction: column; text-align: center; }
+  .footer-links { justify-content: center; }
+
+  /* Grid */
+  .grid-2 { grid-template-columns: 1fr; }
+  .grid-3 { grid-template-columns: 1fr; }
+  .grid-4 { grid-template-columns: 1fr; }
+
+  /* Trust badges */
+  .trust-badges { gap: 1rem; }
+
+  /* Cursor — hide on mobile */
+  #cursor, #cursor-ring { display: none; }
+  body { cursor: auto; }
+  button, a, .btn { cursor: pointer; }
+}
+
+/* ── Small Mobile (≤ 480px) ─────────────────────────────────── */
+@media (max-width: 480px) {
+  .container, .container-narrow { padding: 0 1.2rem; }
+  h1 { font-size: 2.4rem; }
+  h2 { font-size: 1.8rem; }
+  .hero-subtitle { font-size: 1rem; }
+  .btn-lg { padding: 0.95rem 2rem; font-size: 1rem; }
+  .phone-mockup { width: 220px; height: 440px; }
+  .score-ring-svg { width: 80px; height: 80px; }
+  .cta-main-btn { font-size: 1rem; padding: 1rem 2.2rem; }
+}
+
+/* ── Mobile 3D Fallback ─────────────────────────────────────── */
+@media (max-width: 768px) {
+  /* Replace Three.js hero with CSS gradient on mobile */
+  .hero-mobile-bg {
+    display: block !important;
+  }
+
+  /* Simplified apt canvas on mobile */
+  #apt-canvas { height: 300px; border-radius: var(--r-lg); }
+
+  /* Map canvas adjusted */
+  #map-canvas { height: 380px; }
+}
+
+.hero-mobile-bg {
+  display: none;
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 30% 40%, rgba(166,58,18,0.25) 0%, transparent 60%),
+    radial-gradient(ellipse at 70% 60%, rgba(45,155,111,0.1) 0%, transparent 50%),
+    linear-gradient(160deg, #0d0b1e 0%, #1a1228 40%, #0a1628 100%);
+  z-index: 0;
+}
+
+/* ── Large screens ───────────────────────────────────────────── */
+@media (min-width: 1440px) {
+  .container { max-width: 1400px; }
+}
+
+/* ── Print ───────────────────────────────────────────────────── */
+@media print {
+  #loader, #cursor, #cursor-ring, #navbar, #hero-canvas, #map-canvas,
+  #apt-canvas, #cta-canvas, #particles-canvas { display: none !important; }
+  body { background: #fff; color: #000; }
+}

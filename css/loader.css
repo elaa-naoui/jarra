@@ -1,0 +1,98 @@
+/* ============================================================
+   EKRILNA — Loader Styles
+   ============================================================ */
+
+#loader {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-loader);
+  background: var(--c-dark);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  transition: opacity 0.7s ease, visibility 0.7s ease;
+}
+
+#loader.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.loader-logo {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  overflow: hidden;
+}
+
+.loader-letter {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 900;
+  color: #fff;
+  opacity: 0;
+  transform: translateY(30px);
+  display: inline-block;
+  letter-spacing: -0.01em;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  position: relative;
+}
+
+.loader-letter.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.loader-letter.accent { color: var(--c-terra); }
+
+/* Light sweep */
+.loader-sweep {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60px;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
+  animation: sweep 1.8s ease 1.2s forwards;
+  pointer-events: none;
+}
+
+@keyframes sweep {
+  from { left: -60px; opacity: 1; }
+  to   { left: calc(100% + 60px); opacity: 0; }
+}
+
+/* Progress bar */
+.loader-progress {
+  width: 200px;
+  height: 2px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.loader-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--c-terra), var(--c-terra-light));
+  border-radius: 2px;
+  transition: width 0.1s linear;
+}
+
+.loader-tagline {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0;
+  animation: fade-in-up 0.5s ease 1s forwards;
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

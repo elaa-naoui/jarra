@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Smart Jarra — Plateforme intelligente d'agriculture urbaine en Tunisie. Robot mobile, IA d'irrigation, analyse photo, aquaponie." />
+  <meta name="keywords" content="agriculture urbaine, Tunisie, irrigation intelligente, IoT, jarres tunisiennes, aquaponie, robot mobile" />
+  <meta property="og:title" content="Smart Jarra — Agriculture urbaine intelligente en Tunisie" />
+  <meta property="og:description" content="Plateforme IoT pour l'agriculture urbaine avec IA, robot mobile et jarres tunisiennes." />
+  <meta name="theme-color" content="#2e7d32" />
+  <title>Smart Jarra — Agriculture Urbaine Intelligente en Tunisie 🌱</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/design.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/pages.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+</head>
+
+<body>
+
+<!-- ═══════════════════════════════════════════════════════
+     LOADER
+     ═══════════════════════════════════════════════════════ -->
+<div id="page-loader" role="status" aria-label="Chargement de Smart Jarra">
+  <div class="loader-logo-mark">🌿</div>
+  <div class="loader-text">Smart Jarra</div>
+  <p style="color:var(--text-muted);font-size:0.85rem;margin-top:-0.5rem">Agriculture urbaine intelligente</p>
+  <div class="loader-bar">
+    <div class="loader-bar-fill"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     TOAST CONTAINER
+     ═══════════════════════════════════════════════════════ -->
+<div id="toast-container" aria-live="polite"></div>
+
+<!-- ═══════════════════════════════════════════════════════
+     NAVBAR
+     ═══════════════════════════════════════════════════════ -->
+<nav id="navbar" role="navigation" aria-label="Navigation principale">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo" onclick="App.navigate('home');return false;" aria-label="Smart Jarra — Accueil">
+      <div class="logo-icon">🌿</div>
+      Smart <span>Jarra</span>
+    </a>
+
+    <ul class="nav-links" id="nav-links" role="list">
+      <li>
+        <button class="nav-link" data-page="home" aria-label="Accueil">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          Accueil
+        </button>
+      </li>
+      <li>
+        <button class="nav-link" data-page="plantation">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22V12M12 12C12 6 6 2 2 2c0 6 4 10 10 10zM12 12c0-6 6-10 10-10 0 6-4 10-10 10z"/></svg>
+          Plantation
+        </button>
+      </li>
+      <li>
+        <button class="nav-link" data-page="robot">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/><line x1="12" y1="2" x2="12" y2="4"/><circle cx="12" cy="2" r="1"/></svg>
+          Robot
+        </button>
+      </li>
+      <li>
+        <button class="nav-link" data-page="analysis">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+          Analyse IA
+        </button>
+      </li>
+      <li>
+        <button class="nav-link" data-page="plants">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+          Mes Plantes
+        </button>
+      </li>
+      <li>
+        <button class="nav-link" data-page="dashboard">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          Tableau de bord
+        </button>
+      </li>
+    </ul>
+
+    <button class="nav-hamburger" aria-label="Menu" id="hamburger-btn" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════
+     APP CONTAINER
+     ═══════════════════════════════════════════════════════ -->
+<main id="app">
+
+  <!-- ══════════════════════════════════════════════════
+       PAGE 1 — ACCUEIL
+       ══════════════════════════════════════════════════ -->
+  <div id="page-home" class="page">
+
+    <!-- Hero -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="hero-particles" aria-hidden="true"></div>
+
+      <div class="hero-content">
+        <div class="hero-badge" role="status">
+          <span class="dot" aria-hidden="true"></span>
+          🇹🇳&nbsp; Agriculture urbaine intelligente — Tunisie 2025
+        </div>
+
+        <h1 id="hero-heading">
+          Smart <span>Jarra</span><br/>
+          🌿 Cultive l'avenir
+        </h1>
+
+        <p class="hero-subtitle">
+          Plateforme IoT intelligente d'agriculture urbaine en Tunisie — Robot mobile, IA d'irrigation, analyse photo, jarres tunisiennes et aquaponie.
+        </p>
+
+        <div class="hero-cta-grid" role="list">
+          <button class="hero-cta-btn" data-nav="plantation" id="hero-btn-plantation" role="listitem">
+            <div class="btn-icon">🌱</div>
+            <span>Plantation immédiate</span>
+            <span style="font-size:0.75rem;opacity:0.8">Recommandation IA</span>
+          </button>
+          <button class="hero-cta-btn" data-nav="robot" id="hero-btn-robot" role="listitem">
+            <div class="btn-icon">🤖</div>
+            <span>Robot mobile</span>
+            <span style="font-size:0.75rem;opacity:0.8">NFC + Capteurs</span>
+          </button>
+          <button class="hero-cta-btn" data-nav="analysis" id="hero-btn-analysis" role="listitem">
+            <div class="btn-icon">🔬</div>
+            <span>Analyse photo</span>
+            <span style="font-size:0.75rem;opacity:0.8">TensorFlow.js</span>
+          </button>
+          <button class="hero-cta-btn" data-nav="plants" id="hero-btn-plants" role="listitem">
+            <div class="btn-icon">🪴</div>
+            <span>Mes plantes</span>
+            <span style="font-size:0.75rem;opacity:0.8">Suivi complet</span>
+          </button>
+        </div>
+
+        <div style="display:flex;gap:1.5rem;justify-content:center;margin-top:var(--space-lg);flex-wrap:wrap">
+          <div style="display:flex;align-items:center;gap:0.5rem;color:rgba(255,255,255,0.7);font-size:0.8rem">
+            <span style="color:#69f0ae">✓</span> Jarres tunisiennes
+          </div>
+          <div style="display:flex;align-items:center;gap:0.5rem;color:rgba(255,255,255,0.7);font-size:0.8rem">
+            <span style="color:#69f0ae">✓</span> Aquaponie
+          </div>
+          <div style="display:flex;align-items:center;gap:0.5rem;color:rgba(255,255,255,0.7);font-size:0.8rem">
+            <span style="color:#69f0ae">✓</span> Énergie turbine
+          </div>
+          <div style="display:flex;align-items:center;gap:0.5rem;color:rgba(255,255,255,0.7);font-size:0.8rem">
+            <span style="color:#69f0ae">✓</span> Eau de pluie
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-scroll" aria-hidden="true">
+        <span>↓ Défiler</span>
+      </div>
+    </section>
+
+    <!-- Fonctionnalités -->
+    <section class="features-section" aria-labelledby="features-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="overline">Le système complet</span>
+          <h2 id="features-heading">Un écosystème <span class="text-gradient">100% intelligent</span></h2>
+          <p>Smart Jarra intègre six technologies complémentaires pour une agriculture urbaine durable et efficace.</p>
+        </div>
+
+        <div class="features-grid stagger">
+          <div class="feature-card">
+            <div class="feature-icon">🏺</div>
+            <h3>Jarres tunisiennes</h3>
+            <p>Jarres poreuses enterrées près des racines. Irrigation lente et naturelle, économisant jusqu'à 70% d'eau.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🐟</div>
+            <h3>Aquaponie</h3>
+            <p>Système aquarium–plantes en symbiose. Les poissons fertilisent les plantes, les plantes purifient l'eau.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🏠</div>
+            <h3>Toit végétalisé</h3>
+            <p>Culture sur toit avec récupération d'eau de pluie. Réduit la température urbaine et l'empreinte carbone.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🤖</div>
+            <h3>Robot mobile</h3>
+            <p>Robot autonome avec NFC, caméra IA et capteurs IoT. Surveille chaque plante et diagnostique en temps réel.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">⚡</div>
+            <h3>Turbine hydraulique</h3>
+            <p>Mini-turbine hydraulique alimentée par la roue à godets. Produit de l'énergie verte pour alimenter le système.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🧠</div>
+            <h3>IA & Plateforme web</h3>
+            <p>Algorithme IA de recommandation d'irrigation et analyse photo des maladies par TensorFlow.js.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Schéma système -->
+    <section class="system-section" aria-labelledby="system-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="overline" style="color:rgba(255,255,255,0.6)">Architecture IoT</span>
+          <h2 id="system-heading" style="color:white">Comment ça <span style="color:#a5d6a7">fonctionne</span></h2>
+        </div>
+
+        <div class="system-grid stagger">
+          <div class="system-card">
+            <div class="system-icon">📡</div>
+            <h4>Capteurs IoT</h4>
+            <p>Température, humidité sol et air, luminosité, pH eau</p>
+          </div>
+          <div class="system-card">
+            <div class="system-icon">🤖</div>
+            <h4>Robot mobile</h4>
+            <p>NFC, caméra, analyse IA à la volée sur chaque plante</p>
+          </div>
+          <div class="system-card">
+            <div class="system-icon">☁️</div>
+            <h4>Cloud Supabase</h4>
+            <p>Stockage temps réel, historique, alertes automatiques</p>
+          </div>
+          <div class="system-card">
+            <div class="system-icon">📱</div>
+            <h4>Tableau de bord</h4>
+            <p>Visualisation, recommandations et pilotage des valves</p>
+          </div>
+          <div class="system-card">
+            <div class="system-icon">🌧️</div>
+            <h4>Eau de pluie</h4>
+            <p>Récupération et filtration. Réservoir connecté et automatisé</p>
+          </div>
+          <div class="system-card">
+            <div class="system-icon">⚡</div>
+            <h4>Turbine verte</h4>
+            <p>Énergie hydraulique. Alimentation autonome du système</p>
+          </div>
+          <div class="system-card">
+            <div class="system-icon">🏺</div>
+            <h4>Jarres poreuses</h4>
+            <p>Irrigation de précision par capillarité. Zéro gaspillage</p>
+          </div>
+          <div class="system-card">
+            <div class="system-icon">🐟</div>
+            <h4>Aquaponie</h4>
+            <p>Cycle fermé eau–poissons–plantes. Circuit 100% naturel</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lien Japon–Tunisie -->
+    <section class="japan-section" aria-labelledby="japan-heading">
+      <div class="container">
+        <div class="japan-layout">
+          <div>
+            <span class="overline">Inspiration internationale</span>
+            <h2 id="japan-heading">Le lien <span class="text-gradient">Japon – Tunisie</span></h2>
+            <p style="margin-bottom:var(--space-lg)">
+              Smart Jarra s'inspire des savoir-faire japonais en gestion durable de l'eau, de l'agriculture traditionnelle et du <strong>satoyama</strong> — l'harmonie entre l'homme et la nature.
+            </p>
+            <p style="margin-bottom:var(--space-xl)">
+              Le projet adapte ces principes millénaires au contexte tunisien à travers les jarres enterrées, l'aquaponie, la récupération d'eau de pluie et l'agriculture urbaine moderne.
+            </p>
+            <div class="japan-principles" role="list">
+              <span class="japan-tag" role="listitem">🌸 Satoyama</span>
+              <span class="japan-tag" role="listitem">💧 Gestion de l'eau</span>
+              <span class="japan-tag" role="listitem">🏺 Jarres tunisiennes</span>
+              <span class="japan-tag" role="listitem">🤝 Partenariat Nord-Sud</span>
+              <span class="japan-tag" role="listitem">♻️ Zéro déchet</span>
+              <span class="japan-tag" role="listitem">🌱 Permaculture</span>
+              <span class="japan-tag" role="listitem">🐟 Aquaponie japonaise</span>
+            </div>
+          </div>
+
+          <div class="japan-visual reveal-right">
+            <div class="japan-circle">
+              <div class="japan-flags">🇯🇵 🇹🇳</div>
+              <div class="japan-link-icon">⟷</div>
+              <div style="font-size:0.8rem;font-weight:600;color:var(--green);text-align:center">
+                Agriculture<br>intelligente
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ODD Section -->
+    <section class="sdg-section" aria-labelledby="sdg-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="overline">Nations Unies — Agenda 2030</span>
+          <h2 id="sdg-heading">Objectifs de développement <span class="text-gradient">durable</span></h2>
+          <p>Smart Jarra contribue directement à 6 des 17 Objectifs de Développement Durable (ODD).</p>
+        </div>
+
+        <div class="sdg-grid stagger" role="list">
+          <div class="sdg-card" role="listitem">
+            <div class="sdg-number sdg-2" aria-label="ODD 2">2</div>
+            <div class="sdg-info">
+              <h4>🍽️ Faim zéro</h4>
+              <p>Production alimentaire locale et accessible en ville. Autosuffisance alimentaire urbaine.</p>
+            </div>
+          </div>
+          <div class="sdg-card" role="listitem">
+            <div class="sdg-number sdg-6" aria-label="ODD 6">6</div>
+            <div class="sdg-info">
+              <h4>💧 Eau propre</h4>
+              <p>Économie d'eau jusqu'à 70% grâce aux jarres. Récupération et réutilisation de l'eau de pluie.</p>
+            </div>
+          </div>
+          <div class="sdg-card" role="listitem">
+            <div class="sdg-number sdg-11" aria-label="ODD 11">11</div>
+            <div class="sdg-info">
+              <h4>🏙️ Villes durables</h4>
+              <p>Agriculture urbaine intégrée. Toits végétalisés réduisant les îlots de chaleur en ville.</p>
+            </div>
+          </div>
+          <div class="sdg-card" role="listitem">
+            <div class="sdg-number sdg-12" aria-label="ODD 12">12</div>
+            <div class="sdg-info">
+              <h4>♻️ Consommation responsable</h4>
+              <p>Zéro gaspillage d'eau et d'énergie. Turbine hydraulique et panneaux solaires pour l'autoalimentation.</p>
+            </div>
+          </div>
+          <div class="sdg-card" role="listitem">
+            <div class="sdg-number sdg-13" aria-label="ODD 13">13</div>
+            <div class="sdg-info">
+              <h4>🌍 Action climatique</h4>
+              <p>Réduction de l'empreinte carbone. Agriculture sans pesticides et production d'énergie verte.</p>
+            </div>
+          </div>
+          <div class="sdg-card" role="listitem">
+            <div class="sdg-number sdg-17" aria-label="ODD 17">17</div>
+            <div class="sdg-info">
+              <h4>🤝 Partenariats</h4>
+              <p>Collaboration Tunisie–Japon pour partager les savoirs et technologies d'agriculture durable.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-inner">
+        <div class="footer-logo">🌿 Smart <span>Jarra</span></div>
+        <nav class="footer-links" aria-label="Liens du pied de page">
+          <a href="#" onclick="App.navigate('home');return false">Accueil</a>
+          <a href="#" onclick="App.navigate('plantation');return false">Plantation</a>
+          <a href="#" onclick="App.navigate('robot');return false">Robot</a>
+          <a href="#" onclick="App.navigate('dashboard');return false">Tableau de bord</a>
+        </nav>
+        <div class="footer-right">
+          <p>© 2025 Smart Jarra — Tunisie 🇹🇳</p>
+          <p style="margin-top:0.3rem">Projet académique IoT — Agriculture urbaine intelligente</p>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════
+       PAGE 2 — PLANTATION IMMÉDIATE
+       ══════════════════════════════════════════════════ -->
+  <div id="page-plantation" class="page">
+    <div class="container">
+      <div class="dashboard-header">
+        <span class="overline">Recommandation IA</span>
+        <h2>🌱 Plantation immédiate</h2>
+        <p>Choisissez votre plante et l'IA calcule automatiquement le besoin en eau et recommande la meilleure méthode d'irrigation.</p>
+      </div>
+
+      <div class="plantation-layout">
+        <!-- Formulaire -->
+        <div class="plantation-form-card">
+          <h3 style="margin-bottom:var(--space-xl)">🌿 Configurer la plante</h3>
+
+          <!-- Grille types de plantes -->
+          <div class="overline">Type de plante</div>
+          <div id="plant-type-grid" class="plant-type-grid" role="group" aria-label="Type de plante"></div>
+
+          <form id="plantation-form" novalidate>
+            <div class="form-group">
+              <label class="form-label" for="plant-name">Nom de la plante *</label>
+              <input class="form-input" id="plant-name" type="text" placeholder="Ex: Tomate cerise du jardin" required maxlength="80" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="plant-season">Saison (auto-remplie)</label>
+              <select class="form-select" id="plant-season">
+                <option value="printemps">🌸 Printemps</option>
+                <option value="été">☀️ Été</option>
+                <option value="automne">🍂 Automne</option>
+                <option value="hiver">❄️ Hiver</option>
+              </select>
+            </div>
+
+            <div class="divider"></div>
+            <div class="overline">Conditions actuelles</div>
+
+            <div class="grid-2" style="gap:var(--space-md)">
+              <div class="form-group" style="margin-bottom:0">
+                <label class="form-label" for="plant-temp">🌡️ Température (°C)</label>
+                <input class="form-input" id="plant-temp" type="number" value="25" min="0" max="50" step="0.5" />
+              </div>
+              <div class="form-group" style="margin-bottom:0">
+                <label class="form-label" for="plant-humidity">💨 Humidité air (%)</label>
+                <input class="form-input" id="plant-humidity" type="number" value="50" min="0" max="100" />
+              </div>
+            </div>
+
+            <div class="form-group" style="margin-top:var(--space-md)">
+              <label class="form-label" for="plant-soil">🌍 Humidité sol (%) — <span style="color:var(--text-muted)">0 = sec, 100 = saturé</span></label>
+              <input class="form-input" id="plant-soil" type="number" value="50" min="0" max="100" />
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-full" id="calculate-btn">
+              🧠 Calculer avec l'IA
+            </button>
+          </form>
+        </div>
+
+        <!-- Résultat IA -->
+        <div class="plantation-result">
+          <div id="ai-result-panel">
+            <div class="empty-state" style="background:white;border-radius:var(--radius-2xl);padding:var(--space-3xl);box-shadow:var(--shadow-sm);border:1px solid var(--border-light)">
+              <div class="empty-state-icon">🌱</div>
+              <h3>Recommandation IA</h3>
+              <p>Choisissez un type de plante et remplissez le formulaire pour obtenir une recommandation personnalisée.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section explication des méthodes -->
+      <div class="card" style="margin-bottom:var(--space-3xl)">
+        <div class="overline">Méthodes d'irrigation disponibles</div>
+        <h3 style="margin-bottom:var(--space-xl)">Comment l'IA choisit la méthode ?</h3>
+        <div class="grid-3">
+          <div style="text-align:center;padding:var(--space-lg);background:var(--blue-pale);border-radius:var(--radius-lg)">
+            <div style="font-size:2.5rem;margin-bottom:0.5rem">💧</div>
+            <h4 style="color:var(--blue-dark)">Hydroponie</h4>
+            <p style="font-size:0.8rem">Score IA ≥ 70 — Besoin élevé en eau. Culture hors-sol, économise 90% d'eau vs conventionnel.</p>
+          </div>
+          <div style="text-align:center;padding:var(--space-lg);background:var(--terra-pale);border-radius:var(--radius-lg)">
+            <div style="font-size:2.5rem;margin-bottom:0.5rem">🏺</div>
+            <h4 style="color:var(--terra-dark)">Jarre enterrée</h4>
+            <p style="font-size:0.8rem">Score IA 40–69 — Besoin normal. Jarre tunisienne poreuse, irrigation lente par capillarité.</p>
+          </div>
+          <div style="text-align:center;padding:var(--space-lg);background:var(--green-bg);border-radius:var(--radius-lg)">
+            <div style="font-size:2.5rem;margin-bottom:0.5rem">🏠</div>
+            <h4 style="color:var(--green-dark)">Toit végétalisé</h4>
+            <p style="font-size:0.8rem">Score IA &lt; 40 — Besoin faible. Plante résistante, eau de pluie récupérée suffisante.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════
+       PAGE 3 — ROBOT MOBILE
+       ══════════════════════════════════════════════════ -->
+  <div id="page-robot" class="page">
+    <div class="container">
+      <div class="dashboard-header">
+        <span class="overline">Inspection automatique</span>
+        <h2>🤖 Robot mobile</h2>
+        <p>Le robot Smart Bot se déplace de pot en pot, lit les étiquettes NFC, prend des photos et analyse chaque plante avec l'IA.</p>
+      </div>
+
+      <div class="robot-layout">
+        <!-- Carte jardin -->
+        <div class="robot-garden-container">
+          <div class="chart-card-header">
+            <div class="chart-card-title">🌿 Carte du jardin</div>
+            <div style="display:flex;align-items:center;gap:var(--space-sm)">
+              <span class="status-dot dot-green dot-pulse"></span>
+              <span class="text-xs" style="color:var(--text-muted)" id="robot-status-text">Robot en attente</span>
+            </div>
+          </div>
+
+          <div class="garden-canvas-wrap">
+            <canvas id="garden-canvas" height="380" aria-label="Carte du jardin avec le robot mobile"></canvas>
+          </div>
+
+          <div class="robot-controls">
+            <button class="btn btn-primary" id="btn-start-robot">
+              ▶ Lancer le robot
+            </button>
+            <button class="btn btn-danger" id="btn-stop-robot" disabled>
+              ⏹ Arrêter
+            </button>
+          </div>
+        </div>
+
+        <!-- Panel info -->
+        <div class="robot-info-panel">
+
+          <!-- Statut NFC -->
+          <div class="robot-status-card">
+            <div class="robot-status-header">
+              <span class="robot-emoji">🤖</span>
+              <div>
+                <div style="font-weight:700">Smart Bot</div>
+                <div class="text-xs" style="color:var(--text-muted)">Robot d'inspection IA</div>
+              </div>
+            </div>
+
+            <div id="nfc-status" class="nfc-reading" style="display:none">
+              <span>📡</span>
+              <span>En lecture NFC...</span>
+            </div>
+
+            <!-- Capteurs -->
+            <div class="sensor-grid">
+              <div class="sensor-item">
+                <span class="sensor-name">🌡️ TEMPÉRATURE</span>
+                <span class="sensor-value" id="sensor-temp">--°C</span>
+              </div>
+              <div class="sensor-item">
+                <span class="sensor-name">💨 HUMIDITÉ AIR</span>
+                <span class="sensor-value" id="sensor-humidity">--%</span>
+              </div>
+              <div class="sensor-item">
+                <span class="sensor-name">🌍 HUMIDITÉ SOL</span>
+                <span class="sensor-value" id="sensor-soil">--%</span>
+              </div>
+              <div class="sensor-item">
+                <span class="sensor-name">☀️ LUMIÈRE</span>
+                <span class="sensor-value" id="sensor-light">-- lux</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Diagnostic actuel -->
+          <div class="robot-status-card">
+            <div style="font-weight:700;margin-bottom:var(--space-sm)">🔍 Dernier diagnostic</div>
+            <div id="current-diagnosis" style="text-align:center;color:var(--text-muted);font-size:0.85rem;padding:var(--space-lg)">
+              Aucun diagnostic — lancez le robot
+            </div>
+          </div>
+
+          <!-- Liste pots -->
+          <div class="robot-status-card">
+            <div style="font-weight:700;margin-bottom:var(--space-sm)">🪴 Pots du jardin</div>
+            <div class="pot-list" id="pot-list"></div>
+          </div>
+
+          <!-- Journal -->
+          <div class="robot-status-card">
+            <div style="font-weight:700;margin-bottom:var(--space-sm)">📋 Journal</div>
+            <div class="robot-log" id="robot-log">
+              <div class="log-entry">
+                <span class="log-time">--:--</span>
+                <span>En attente du lancement...</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════
+       PAGE 4 — ANALYSE PHOTO
+       ══════════════════════════════════════════════════ -->
+  <div id="page-analysis" class="page">
+    <div class="container">
+      <div class="dashboard-header">
+        <span class="overline">Intelligence artificielle</span>
+        <h2>🔬 Analyse photo</h2>
+        <p>Téléversez une photo de feuille. L'IA détecte les maladies, le stress hydrique et les problèmes nutritionnels.</p>
+      </div>
+
+      <!-- Sélecteur de plante -->
+      <div class="form-group" style="max-width:400px;margin-bottom:var(--space-xl)">
+        <label class="form-label" for="analysis-plant-select">🪴 Associer à une plante (optionnel)</label>
+        <select class="form-select" id="analysis-plant-select">
+          <option value="">-- Choisir une plante --</option>
+        </select>
+      </div>
+
+      <div class="analysis-layout">
+        <!-- Zone upload -->
+        <div>
+          <label class="upload-zone" id="upload-zone" for="photo-input" aria-label="Zone de téléversement de photo">
+            <input type="file" id="photo-input" accept="image/*" style="display:none" aria-label="Choisir une image" />
+            <div id="upload-placeholder">
+              <div class="upload-icon">📸</div>
+              <h3>Déposez une photo ici</h3>
+              <p>ou cliquez pour choisir une image</p>
+              <div style="margin-top:var(--space-lg)">
+                <span class="badge badge-green">JPG</span>
+                <span class="badge badge-green">PNG</span>
+                <span class="badge badge-green">WEBP</span>
+              </div>
+            </div>
+          </label>
+
+          <div class="photo-preview-wrap hidden" style="margin-top:var(--space-lg);border-radius:var(--radius-xl);overflow:hidden;box-shadow:var(--shadow-md)">
+            <img id="photo-preview" src="" alt="Photo analysée" style="width:100%;height:280px;object-fit:cover" />
+          </div>
+
+          <div style="display:flex;gap:var(--space-sm);margin-top:var(--space-lg)">
+            <button class="btn btn-primary" id="analyze-btn" disabled style="flex:1">
+              🔍 Analyser la photo
+            </button>
+            <button class="btn btn-ghost" id="btn-ai-real" title="Activer le modèle TensorFlow.js réel">
+              🧪 Activer IA réelle
+            </button>
+          </div>
+
+          <!-- Info modèle -->
+          <div class="alert alert-info" style="margin-top:var(--space-lg)">
+            <span>ℹ️</span>
+            <div>
+              <strong>Mode simulation activé</strong><br/>
+              L'IA simule l'analyse photo. Cliquez "Activer IA réelle" pour charger le modèle MobileNet (TensorFlow.js) si disponible.
+            </div>
+          </div>
+
+          <!-- Diagnostics possibles -->
+          <div class="card" style="margin-top:var(--space-lg)">
+            <div class="overline">Diagnostics détectés par l'IA</div>
+            <div style="display:flex;flex-direction:column;gap:var(--space-sm)">
+              <div style="display:flex;align-items:center;gap:var(--space-sm)">
+                <span style="color:#2e7d32;font-size:1.2rem">✅</span>
+                <div><strong>Healthy</strong> — Plante saine</div>
+              </div>
+              <div style="display:flex;align-items:center;gap:var(--space-sm)">
+                <span style="color:#1565c0;font-size:1.2rem">💧</span>
+                <div><strong>Water stress</strong> — Stress hydrique</div>
+              </div>
+              <div style="display:flex;align-items:center;gap:var(--space-sm)">
+                <span style="color:#f57f17;font-size:1.2rem">🍂</span>
+                <div><strong>Yellow leaves</strong> — Jaunissement</div>
+              </div>
+              <div style="display:flex;align-items:center;gap:var(--space-sm)">
+                <span style="color:#c62828;font-size:1.2rem">🦠</span>
+                <div><strong>Disease spots</strong> — Taches de maladie</div>
+              </div>
+              <div style="display:flex;align-items:center;gap:var(--space-sm)">
+                <span style="color:#6a1b9a;font-size:1.2rem">🥀</span>
+                <div><strong>Wilting</strong> — Flétrissement</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Résultat diagnostic -->
+        <div class="diagnosis-card">
+          <div class="overline">Résultat de l'analyse IA</div>
+          <div id="diagnosis-result">
+            <div class="empty-state" style="padding:var(--space-2xl)">
+              <div class="empty-state-icon">🔬</div>
+              <h3>En attente d'analyse</h3>
+              <p>Téléversez une photo et cliquez sur "Analyser" pour obtenir le diagnostic.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════
+       PAGE 5 — MES PLANTES
+       ══════════════════════════════════════════════════ -->
+  <div id="page-plants" class="page">
+    <div class="container">
+      <div class="plants-header">
+        <div>
+          <span class="overline">Suivi complet</span>
+          <h2>🪴 Mes plantes</h2>
+        </div>
+        <div style="display:flex;gap:var(--space-sm)">
+          <button class="btn btn-primary" onclick="App.navigate('plantation')" id="add-plant-btn">
+            + Ajouter une plante
+          </button>
+        </div>
+      </div>
+
+      <div id="plants-content">
+        <!-- Rendu dynamiquement par Pages.plants.render() -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════
+       PAGE 6 — TABLEAU DE BORD
+       ══════════════════════════════════════════════════ -->
+  <div id="page-dashboard" class="page">
+    <div class="container">
+      <div class="dashboard-header">
+        <div style="display:flex;justify-content:space-between;align-items:flex-end">
+          <div>
+            <span class="overline">Vue d'ensemble</span>
+            <h2>📊 Tableau de bord</h2>
+          </div>
+          <div style="display:flex;align-items:center;gap:0.5rem;font-size:0.8rem;color:var(--text-muted)">
+            <span class="status-dot dot-green dot-pulse"></span>
+            Mise à jour automatique toutes les 10s
+          </div>
+        </div>
+      </div>
+
+      <!-- KPIs -->
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-icon kpi-icon-green">🪴</div>
+          <div>
+            <div class="kpi-value" id="kpi-plants">0</div>
+            <div class="kpi-label">Plantes totales</div>
+          </div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-icon kpi-icon-blue">💧</div>
+          <div>
+            <div class="kpi-value" id="kpi-stressed">0</div>
+            <div class="kpi-label">En stress hydrique</div>
+          </div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-icon" style="background:#fce4e4">🦠</div>
+          <div>
+            <div class="kpi-value" id="kpi-sick">0</div>
+            <div class="kpi-label">Plantes malades</div>
+          </div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-icon kpi-icon-terra">🏺</div>
+          <div>
+            <div class="kpi-value" id="kpi-jars">0</div>
+            <div class="kpi-label">Jarres actives</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Graphique principal + alertes -->
+      <div class="dashboard-row">
+        <div class="chart-card">
+          <div class="chart-card-header">
+            <div class="chart-card-title">📈 Historique des mesures (10 dernières)</div>
+            <span class="badge badge-green">Temps réel</span>
+          </div>
+          <canvas id="dashboard-chart" style="width:100%;height:220px"></canvas>
+        </div>
+
+        <div class="alerts-card">
+          <div class="chart-card-header">
+            <div class="chart-card-title">🚨 Alertes récentes</div>
+          </div>
+          <div id="alerts-list">
+            <div style="display:flex;align-items:center;justify-content:center;padding:var(--space-xl)">
+              <div class="spinner"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Jauges -->
+      <div class="dashboard-row">
+        <!-- Jarres + Aquarium -->
+        <div class="chart-card">
+          <div class="chart-card-header">
+            <div class="chart-card-title">🏺 Niveaux des réservoirs</div>
+          </div>
+          <div class="gauge-container">
+            <div class="gauge-wrap">
+              <canvas id="gauge-jar" style="width:140px;height:140px"></canvas>
+              <div style="text-align:center;margin-top:0.5rem">
+                <div style="font-weight:700" id="kpi-jar-level">--%</div>
+                <div class="text-xs" style="color:var(--text-muted)">Jarres (moy.)</div>
+              </div>
+            </div>
+            <div class="gauge-wrap">
+              <canvas id="gauge-aqua" style="width:140px;height:140px"></canvas>
+              <div style="text-align:center;margin-top:0.5rem">
+                <div style="font-weight:700" id="kpi-aqua-level">--%</div>
+                <div class="text-xs" style="color:var(--text-muted)">Aquarium</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Statistiques rapides -->
+          <div class="divider"></div>
+          <div class="grid-4" style="text-align:center;gap:var(--space-md)">
+            <div>
+              <div style="font-size:1.3rem;font-weight:800;color:var(--blue)" id="kpi-aqua-temp">--°C</div>
+              <div class="text-xs" style="color:var(--text-muted)">Temp. eau</div>
+            </div>
+            <div>
+              <div style="font-size:1.3rem;font-weight:800;color:var(--green)" id="kpi-fish">0</div>
+              <div class="text-xs" style="color:var(--text-muted)">Poissons</div>
+            </div>
+            <div>
+              <div style="font-size:1.3rem;font-weight:800;color:var(--terra)" id="kpi-jar-count-mini">--</div>
+              <div class="text-xs" style="color:var(--text-muted)">Jarres</div>
+            </div>
+            <div>
+              <div style="font-size:1.3rem;font-weight:800;color:var(--green)" id="kpi-healthy-mini">--</div>
+              <div class="text-xs" style="color:var(--text-muted)">Saines</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Aquarium visuel -->
+        <div class="aquarium-card">
+          <div class="chart-card-header">
+            <div class="chart-card-title">🐟 Aquarium</div>
+            <span class="badge badge-blue">Aquaponie</span>
+          </div>
+          <div class="aquarium-visual" id="aquarium-visual">
+            <!-- Poissons animés injectés par JS -->
+          </div>
+          <div id="aquarium-stats" style="margin-top:var(--space-md)"></div>
+          <div class="alert alert-info" style="margin-top:var(--space-md);font-size:0.8rem">
+            <span>💡</span>
+            <span>Les poissons fertilisent les plantes via le circuit aquaponique. L'eau est filtrée naturellement par les racines.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Statut plantes -->
+      <div class="chart-card" style="margin-bottom:var(--space-3xl)">
+        <div class="chart-card-header">
+          <div class="chart-card-title">🌱 Toutes les plantes</div>
+          <button class="btn btn-ghost btn-sm" onclick="App.navigate('plants')">Voir tout →</button>
+        </div>
+        <div id="dashboard-plants-list" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:var(--space-md)">
+          <!-- Rendu dynamiquement -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- ═══════════════════════════════════════════════════════
+     SCRIPTS
+     ═══════════════════════════════════════════════════════ -->
+<!-- TensorFlow.js (optionnel, pour l'IA réelle) -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@2.1.0/dist/mobilenet.min.js"></script> -->
+
+<!-- App scripts -->
+<script src="js/db.js"></script>
+<script src="js/ai.js"></script>
+<script src="js/charts.js"></script>
+<script src="js/robot.js"></script>
+<script src="js/app.js"></script>
+
+<!-- Patch dashboard mini KPIs -->
+<script>
+  // Mettre à jour les mini KPIs du dashboard après le rendu
+  const origDashboardRender = Pages.dashboard.render.bind(Pages.dashboard);
+  Pages.dashboard.render = function() {
+    origDashboardRender();
+    // Mini KPIs supplémentaires
+    const plants  = DB.plants.getAll();
+    const healthy = plants.filter(p => p.status === 'healthy').length;
+    const jars    = DB.jars.getAll().length;
+    const kpiJarMini = document.getElementById('kpi-jar-count-mini');
+    const kpiHealthy = document.getElementById('kpi-healthy-mini');
+    if (kpiJarMini) kpiJarMini.textContent = jars;
+    if (kpiHealthy) kpiHealthy.textContent  = healthy;
+
+    // Dashboard plants list
+    const listEl = document.getElementById('dashboard-plants-list');
+    if (listEl) {
+      listEl.innerHTML = plants.slice(0, 12).map(p => `
+        <div style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem;background:var(--bg);border-radius:var(--radius-md);cursor:pointer" 
+             onclick="App.navigate('plants')">
+          <span style="font-size:1.5rem">${App.getPlantEmoji(p.type)}</span>
+          <div style="flex:1;min-width:0">
+            <div style="font-weight:600;font-size:0.85rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${p.name}</div>
+            <div>${App.getStatusBadge(p.status)}</div>
+          </div>
+        </div>
+      `).join('') || '<div style="color:var(--text-muted);font-size:0.875rem;text-align:center;padding:var(--space-xl)">Aucune plante</div>';
+    }
+  };
+</script>
+
+</body>
+</html>

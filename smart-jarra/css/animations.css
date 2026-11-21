@@ -1,0 +1,287 @@
+/* ═══════════════════════════════════════════════════════════
+   SMART JARRA — Animations CSS
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── Scroll reveal ───────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-32px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(32px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.reveal-scale.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Staggered children */
+.stagger > * {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.stagger.visible > *:nth-child(1) { transition-delay: 0s;    opacity: 1; transform: none; }
+.stagger.visible > *:nth-child(2) { transition-delay: 0.1s;  opacity: 1; transform: none; }
+.stagger.visible > *:nth-child(3) { transition-delay: 0.2s;  opacity: 1; transform: none; }
+.stagger.visible > *:nth-child(4) { transition-delay: 0.3s;  opacity: 1; transform: none; }
+.stagger.visible > *:nth-child(5) { transition-delay: 0.4s;  opacity: 1; transform: none; }
+.stagger.visible > *:nth-child(6) { transition-delay: 0.5s;  opacity: 1; transform: none; }
+
+/* ── Hover effects ───────────────────────────────────────── */
+.hover-lift {
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.hover-lift:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-xl);
+}
+
+.hover-scale {
+  transition: transform var(--transition);
+}
+
+.hover-scale:hover {
+  transform: scale(1.03);
+}
+
+/* ── Shimmer skeleton ────────────────────────────────────── */
+.skeleton {
+  background: linear-gradient(90deg,
+    var(--border-light) 25%,
+    var(--bg) 50%,
+    var(--border-light) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: var(--radius-sm);
+}
+
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ── Water wave ──────────────────────────────────────────── */
+.wave-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.wave {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  background: linear-gradient(to top, rgba(33,150,243,0.4), transparent);
+  transform-origin: bottom;
+  animation: waveRise 3s ease-out forwards;
+}
+
+.wave::before,
+.wave::after {
+  content: '';
+  position: absolute;
+  left: -50%;
+  width: 200%;
+  height: 20px;
+  border-radius: 50%;
+  animation: waveSurface 3s ease-in-out infinite;
+}
+
+.wave::before {
+  top: 0;
+  background: rgba(33,150,243,0.3);
+}
+
+.wave::after {
+  top: 5px;
+  background: rgba(33,150,243,0.2);
+  animation-delay: -1.5s;
+}
+
+@keyframes waveRise {
+  from { clip-path: inset(100% 0 0 0); }
+  to   { clip-path: inset(0% 0 0 0); }
+}
+
+@keyframes waveSurface {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(5%); }
+}
+
+/* ── NFC scan animation ──────────────────────────────────── */
+.nfc-scan-anim {
+  position: relative;
+  display: inline-block;
+}
+
+.nfc-ring {
+  position: absolute;
+  inset: -4px;
+  border: 2px solid var(--blue);
+  border-radius: 50%;
+  opacity: 0;
+  animation: nfcExpand 2s ease-out infinite;
+}
+
+.nfc-ring:nth-child(2) { animation-delay: 0.5s; }
+.nfc-ring:nth-child(3) { animation-delay: 1s; }
+
+@keyframes nfcExpand {
+  from { transform: scale(0.8); opacity: 0.8; }
+  to   { transform: scale(2.5); opacity: 0; }
+}
+
+/* ── Camera flash ────────────────────────────────────────── */
+.camera-flash {
+  position: fixed;
+  inset: 0;
+  background: white;
+  z-index: 999;
+  pointer-events: none;
+  animation: cameraFlash 0.3s ease forwards;
+}
+
+@keyframes cameraFlash {
+  0%   { opacity: 0.9; }
+  100% { opacity: 0; }
+}
+
+/* ── Robot path trace ────────────────────────────────────── */
+.robot-path {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: drawPath 2s ease forwards;
+}
+
+@keyframes drawPath {
+  to { stroke-dashoffset: 0; }
+}
+
+/* ── Typewriter ──────────────────────────────────────────── */
+.typewriter {
+  overflow: hidden;
+  white-space: nowrap;
+  animation: typewriter 2s steps(40) forwards;
+}
+
+@keyframes typewriter {
+  from { width: 0; }
+  to   { width: 100%; }
+}
+
+/* ── Breathing glow ──────────────────────────────────────── */
+.glow-green {
+  animation: glowGreen 2s ease-in-out infinite;
+}
+
+@keyframes glowGreen {
+  0%, 100% { box-shadow: 0 0 10px rgba(46,125,50,0.3); }
+  50%       { box-shadow: 0 0 25px rgba(46,125,50,0.7); }
+}
+
+.glow-blue {
+  animation: glowBlue 2s ease-in-out infinite;
+}
+
+@keyframes glowBlue {
+  0%, 100% { box-shadow: 0 0 10px rgba(21,101,192,0.3); }
+  50%       { box-shadow: 0 0 25px rgba(21,101,192,0.7); }
+}
+
+/* ── Page transition ─────────────────────────────────────── */
+.page-transition {
+  animation: pageTransition 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes pageTransition {
+  from {
+    opacity: 0;
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    opacity: 1;
+    clip-path: inset(0 0% 0 0);
+  }
+}
+
+/* ── Counter animation ───────────────────────────────────── */
+.counter {
+  display: inline-block;
+  transition: transform 0.1s ease;
+}
+
+/* ── Water ripple ────────────────────────────────────────── */
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.3);
+  transform: scale(0);
+  animation: rippleExpand 0.6s linear;
+  pointer-events: none;
+}
+
+@keyframes rippleExpand {
+  to { transform: scale(4); opacity: 0; }
+}
+
+/* ── Jar water fill ──────────────────────────────────────── */
+.jar-water {
+  position: absolute;
+  bottom: 0;
+  left: 2px;
+  right: 2px;
+  background: linear-gradient(to top,
+    rgba(33,150,243,0.7),
+    rgba(33,150,243,0.4)
+  );
+  transition: height 1s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 0 0 8px 8px;
+}
+
+/* ── SVG leaf ────────────────────────────────────────────── */
+.leaf-spin {
+  transform-origin: 50% 100%;
+  animation: leafSway 3s ease-in-out infinite;
+}
+
+@keyframes leafSway {
+  0%, 100% { transform: rotate(-5deg); }
+  50% { transform: rotate(5deg); }
+}

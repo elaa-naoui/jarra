@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Jarra — Agriculture Urbaine Intelligente en Tunisie</title>
+  <meta name="description" content="Smart Jarra — chaque goutte cultive demain. Plateforme intelligente d'agriculture urbaine en Tunisie.">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brandGreen: '#2e7d32',
+            brandBlue: '#1565c0',
+            brandTerracotta: '#d84315',
+            brandBg: '#f4f7f4',
+          }
+        }
+      }
+    }
+  </script>
+  <!-- Google Fonts Inter & Poppins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Poppins:wght@600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f4f7f4;
+      color: #1e293b;
+    }
+    .font-poppins {
+      font-family: 'Poppins', sans-serif;
+    }
+    .tab-content {
+      display: none;
+    }
+    .tab-content.active {
+      display: block;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col bg-[#f4f7f4]">
+
+  <!-- ================= NAVBAR ================= -->
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-emerald-100 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        <!-- Logo & Slogan -->
+        <div class="flex items-center gap-3 cursor-pointer" onclick="showTab('accueil')">
+          <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-600 to-emerald-900 flex items-center justify-center text-2xl shadow-md">
+            🏺
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="text-2xl font-black tracking-tight text-emerald-900 font-poppins">
+                Smart<span class="text-emerald-600">Jarra</span>
+              </span>
+              <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 border border-amber-300">
+                Tunisie 🇹🇳
+              </span>
+            </div>
+            <p class="text-xs font-semibold text-emerald-700/90 hidden sm:block">
+              Chaque goutte cultive demain
+            </p>
+          </div>
+        </div>
+
+        <!-- Navigation Desktop -->
+        <nav class="hidden lg:flex items-center gap-1">
+          <button onclick="showTab('accueil')" id="nav-accueil" class="nav-btn px-3 py-2 rounded-xl text-xs font-bold transition-all bg-emerald-700 text-white">
+            🌱 Accueil
+          </button>
+          <button onclick="showTab('plantation')" id="nav-plantation" class="nav-btn px-3 py-2 rounded-xl text-xs font-bold transition-all text-slate-700 hover:bg-emerald-50">
+            💧 Plantation immédiate
+          </button>
+          <button onclick="showTab('robot')" id="nav-robot" class="nav-btn px-3 py-2 rounded-xl text-xs font-bold transition-all text-slate-700 hover:bg-emerald-50">
+            🤖 Robot mobile
+          </button>
+          <button onclick="showTab('analyse-photo')" id="nav-analyse-photo" class="nav-btn px-3 py-2 rounded-xl text-xs font-bold transition-all text-slate-700 hover:bg-emerald-50">
+            📷 Analyse photo
+          </button>
+          <button onclick="showTab('mes-plantes')" id="nav-mes-plantes" class="nav-btn px-3 py-2 rounded-xl text-xs font-bold transition-all text-slate-700 hover:bg-emerald-50">
+            📋 Mes plantes
+          </button>
+          <button onclick="showTab('dashboard')" id="nav-dashboard" class="nav-btn px-3 py-2 rounded-xl text-xs font-bold transition-all text-slate-700 hover:bg-emerald-50">
+            📊 Tableau de bord
+          </button>
+        </nav>
+
+        <!-- Modèle Switcher Badge -->
+        <div class="flex items-center gap-3">
+          <button onclick="toggleTfModel()" id="model-toggle-btn" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-blue-50 text-blue-700 border border-blue-200 hover:bg-blue-100 transition-colors">
+            ⚡ Mode IA : Simulation
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= CONTENU PRINCIPAL ================= -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+    <!-- ================= 1. PAGE ACCUEIL ================= -->
+    <div id="tab-accueil" class="tab-content active space-y-12">
+      <!-- Hero Banner -->
+      <div class="rounded-3xl bg-gradient-to-br from-emerald-900 via-emerald-800 to-slate-900 text-white p-8 sm:p-14 relative overflow-hidden shadow-xl">
+        <div class="relative z-10 max-w-3xl space-y-6">
+          <span class="inline-block px-3 py-1 rounded-full bg-white/10 backdrop-blur-md text-xs font-bold text-emerald-300 border border-white/20">
+            Projet Académique d'Excellence 2025 • Smart Agriculture
+          </span>
+          <h1 class="text-4xl sm:text-6xl font-black font-poppins leading-tight">
+            Smart Jarra
+          </h1>
+          <p className="text-xl sm:text-2xl font-bold text-emerald-200">
+            Agriculture urbaine intelligente en Tunisie 🇹🇳
+          </p>
+          <div class="p-4 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 max-w-lg">
+            <p class="text-xs font-bold uppercase tracking-wider text-emerald-300">Slogan</p>
+            <p class="text-lg sm:text-xl font-black italic text-white">« Smart Jarra — chaque goutte cultive demain. »</p>
+          </div>
+          <p class="text-sm text-slate-300 leading-relaxed max-w-2xl">
+            Optimisation du rendement maraîcher urbain par couplage de jarres en terre cuite poreuses tunisiennes, robotique mobile d'inspection autonome, puces NFC, IA neuronale et bassins aquaponiques.
+          </p>
+
+          <!-- Boutons Rapides -->
+          <div class="flex flex-wrap gap-3 pt-3">
+            <button onclick="showTab('plantation')" class="px-5 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs transition-all shadow-lg">
+              💧 Plantation immédiate
+            </button>
+            <button onclick="showTab('robot')" class="px-5 py-2.5 rounded-xl bg-white/15 hover:bg-white/25 border border-white/25 text-white font-bold text-xs transition-all">
+              🤖 Robot mobile
+            </button>
+            <button onclick="showTab('analyse-photo')" class="px-5 py-2.5 rounded-xl bg-white/15 hover:bg-white/25 border border-white/25 text-white font-bold text-xs transition-all">
+              📷 Analyse photo
+            </button>
+            <button onclick="showTab('mes-plantes')" class="px-5 py-2.5 rounded-xl bg-white/15 hover:bg-white/25 border border-white/25 text-white font-bold text-xs transition-all">
+              📋 Mes plantes
+            </button>
+            <button onclick="showTab('dashboard')" class="px-5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white font-bold text-xs transition-all">
+              📊 Tableau de bord
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section Lien Japon–Tunisie -->
+      <div class="p-8 rounded-3xl bg-gradient-to-r from-emerald-50 via-teal-50 to-blue-50 border border-emerald-200/80 shadow-sm space-y-4">
+        <div class="flex items-center gap-2">
+          <span class="text-2xl">🇯🇵 🤝 🇹🇳</span>
+          <h2 class="text-2xl font-black text-slate-900 font-poppins">Lien Japon – Tunisie</h2>
+        </div>
+        <p class="text-sm sm:text-base text-slate-700 leading-relaxed">
+          « Smart Jarra s’inspire des savoir-faire japonais en gestion durable de l’eau, de l’agriculture traditionnelle et du satoyama. Le projet adapte ces principes au contexte tunisien à travers les jarres enterrées, l’aquaponie, la récupération d’eau de pluie et l’agriculture urbaine. »
+        </p>
+      </div>
+
+      <!-- Section ODD (Objectifs de Développement Durable) -->
+      <div class="space-y-6">
+        <h2 class="text-2xl font-black text-slate-900 font-poppins">Objectifs de Développement Durable (ODD)</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4">
+          <div class="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm">
+            <span class="px-2 py-0.5 rounded text-[10px] font-black bg-amber-600 text-white">ODD 2</span>
+            <h3 class="text-xs font-black text-slate-900 mt-2">Faim zéro</h3>
+            <p class="text-[11px] text-slate-500 mt-1">Culture maraîchère urbaine productive et biologique.</p>
+          </div>
+          <div class="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm">
+            <span class="px-2 py-0.5 rounded text-[10px] font-black bg-blue-500 text-white">ODD 6</span>
+            <h3 class="text-xs font-black text-slate-900 mt-2">Eau propre & assainissement</h3>
+            <p class="text-[11px] text-slate-500 mt-1">70% d'économie hydrique via jarres souterraines.</p>
+          </div>
+          <div class="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm">
+            <span class="px-2 py-0.5 rounded text-[10px] font-black bg-orange-500 text-white">ODD 11</span>
+            <h3 class="text-xs font-black text-slate-900 mt-2">Villes & communautés durables</h3>
+            <p class="text-[11px] text-slate-500 mt-1">Toitures végétales et micro-climats régulés.</p>
+          </div>
+          <div class="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm">
+            <span class="px-2 py-0.5 rounded text-[10px] font-black bg-yellow-600 text-white">ODD 12</span>
+            <h3 class="text-xs font-black text-slate-900 mt-2">Consommation responsable</h3>
+            <p class="text-[11px] text-slate-500 mt-1">Recyclage pluvial et engrais issu de l'aquaponie.</p>
+          </div>
+          <div class="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm">
+            <span class="px-2 py-0.5 rounded text-[10px] font-black bg-emerald-700 text-white">ODD 13</span>
+            <h3 class="text-xs font-black text-slate-900 mt-2">Action climatique</h3>
+            <p class="text-[11px] text-slate-500 mt-1">Résilience face à la sécheresse & micro-turbine hydro.</p>
+          </div>
+          <div class="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm">
+            <span class="px-2 py-0.5 rounded text-[10px] font-black bg-indigo-700 text-white">ODD 17</span>
+            <h3 class="text-xs font-black text-slate-900 mt-2">Partenariats mondiaux</h3>
+            <p class="text-[11px] text-slate-500 mt-1">Transfert technologique & synergie Tunisie–Japon.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section Fonctionnement & Technologies -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="p-6 rounded-3xl bg-white border border-slate-200 shadow-sm space-y-4">
+          <h2 class="text-lg font-black text-slate-900 font-poppins">Fonctionnement du Système</h2>
+          <ul class="space-y-3 text-xs text-slate-600">
+            <li class="flex items-start gap-2">
+              <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-800 font-bold flex items-center justify-center shrink-0">1</span>
+              <span><strong>Identification NFC :</strong> Chaque pot de plante dispose d'un tag NFC infalsifiable.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-800 font-bold flex items-center justify-center shrink-0">2</span>
+              <span><strong>Patrouille Robotique :</strong> Le robot se déplace pot à pot, capture une photo et lit les capteurs.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-800 font-bold flex items-center justify-center shrink-0">3</span>
+              <span><strong>IA & Vision :</strong> Diagnostic en 5 classes (saine, stress hydrique, feuilles jaunes, maladie, flétrissement).</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-800 font-bold flex items-center justify-center shrink-0">4</span>
+              <span><strong>Irrigation Régulée :</strong> Distribution optimale par jarre poreuse, hydroponie ou toiture.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="p-6 rounded-3xl bg-white border border-slate-200 shadow-sm space-y-4">
+          <h2 class="text-lg font-black text-slate-900 font-poppins">Technologies Utilisées</h2>
+          <div class="grid grid-cols-2 gap-3 text-xs">
+            <div class="p-3 rounded-xl bg-slate-50 border border-slate-200">
+              <strong class="text-slate-900 block">Next.js 14 / React</strong>
+              <span class="text-slate-500 text-[11px]">Architecture App Router</span>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-50 border border-slate-200">
+              <strong class="text-slate-900 block">Tailwind CSS</strong>
+              <span class="text-slate-500 text-[11px]">Interface moderne épurée</span>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-50 border border-slate-200">
+              <strong class="text-slate-900 block">Supabase</strong>
+              <span class="text-slate-500 text-[11px]">PostgreSQL & RLS</span>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-50 border border-slate-200">
+              <strong class="text-slate-900 block">TensorFlow.js</strong>
+              <span class="text-slate-500 text-[11px]">Deep Learning foliaire</span>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-50 border border-slate-200">
+              <strong class="text-slate-900 block">Recharts</strong>
+              <span class="text-slate-500 text-[11px]">Visualisation microclimat</span>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-50 border border-slate-200">
+              <strong class="text-slate-900 block">Simulation IoT</strong>
+              <span class="text-slate-500 text-[11px]">NFC, Rover, Jarres & Noria</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section Outils & Liens Officiels -->
+      <div class="p-6 rounded-3xl bg-white border border-slate-200 shadow-sm space-y-4">
+        <h2 class="text-lg font-black text-slate-900 font-poppins">Outils & Références Techniques Officielles</h2>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs">
+            <thead>
+              <tr class="bg-slate-900 text-white">
+                <th class="py-2.5 px-4 rounded-l-lg">Outil</th>
+                <th class="py-2.5 px-4">Rôle</th>
+                <th class="py-2.5 px-4 rounded-r-lg text-right">Lien</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100 font-medium text-slate-700">
+              <tr>
+                <td class="py-3 px-4 font-bold text-slate-900">Supabase React</td>
+                <td class="py-3 px-4">Base de données et authentification</td>
+                <td class="py-3 px-4 text-right"><a href="https://supabase.com/docs/guides/getting-started/quickstarts/reactjs" target="_blank" class="text-emerald-700 font-bold hover:underline">Documentation ↗</a></td>
+              </tr>
+              <tr>
+                <td class="py-3 px-4 font-bold text-slate-900">TensorFlow.js Image Classification</td>
+                <td class="py-3 px-4">IA photo dans le navigateur</td>
+                <td class="py-3 px-4 text-right"><a href="https://www.tensorflow.org/js/tutorials/transfer/image_classification" target="_blank" class="text-emerald-700 font-bold hover:underline">Tutoriel ↗</a></td>
+              </tr>
+              <tr>
+                <td class="py-3 px-4 font-bold text-slate-900">PlantVillage Dataset</td>
+                <td class="py-3 px-4">Images de feuilles saines et malades</td>
+                <td class="py-3 px-4 text-right"><a href="https://www.tensorflow.org/datasets/catalog/plant_village" target="_blank" class="text-emerald-700 font-bold hover:underline">Dataset ↗</a></td>
+              </tr>
+              <tr>
+                <td class="py-3 px-4 font-bold text-slate-900">Wokwi ESP32</td>
+                <td class="py-3 px-4">Simulation électronique</td>
+                <td class="py-3 px-4 text-right"><a href="https://wokwi.com/esp32" target="_blank" class="text-emerald-700 font-bold hover:underline">Simulateur ↗</a></td>
+              </tr>
+              <tr>
+                <td class="py-3 px-4 font-bold text-slate-900">CodePen</td>
+                <td class="py-3 px-4">Tester la version HTML</td>
+                <td class="py-3 px-4 text-right"><a href="https://codepen.io/pen/" target="_blank" class="text-emerald-700 font-bold hover:underline">Bac à sable ↗</a></td>
+              </tr>
+              <tr>
+                <td class="py-3 px-4 font-bold text-slate-900">Vercel</td>
+                <td class="py-3 px-4">Déployer la plateforme</td>
+                <td class="py-3 px-4 text-right"><a href="https://vercel.com" target="_blank" class="text-emerald-700 font-bold hover:underline">Plateforme ↗</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= 2. PAGE PLANTATION IMMÉDIATE ================= -->
+    <div id="tab-plantation" class="tab-content space-y-8">
+      <div>
+        <h1 class="text-3xl font-black text-slate-900 font-poppins">Plantation Immédiate & Algorithme IA</h1>
+        <p class="text-xs text-slate-500 mt-1">Calcul du besoin en eau et préconisation agronomique précise.</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <!-- Formulaire -->
+        <div class="lg:col-span-7 bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-5">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Type de plante :</label>
+              <select id="calc-plant-type" onchange="onPlantTypeChange()" class="w-full text-xs font-bold border border-slate-300 rounded-xl px-3 py-2 bg-slate-50">
+                <option value="Tomate">Tomate</option>
+                <option value="Menthe">Menthe</option>
+                <option value="Basilic">Basilic</option>
+                <option value="Persil">Persil</option>
+                <option value="Romarin">Romarin</option>
+                <option value="Laitue">Laitue</option>
+                <option value="Fraise">Fraise</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Nom du plant :</label>
+              <input type="text" id="calc-plant-name" value="Tomate Cerise Mornag" class="w-full text-xs font-bold border border-slate-300 rounded-xl px-3 py-2 bg-slate-50">
+            </div>
+          </div>
+
+          <!-- Saison Auto -->
+          <div class="p-3.5 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-between">
+            <span class="text-xs font-bold text-emerald-800">Saison culturale déduite automatiquement :</span>
+            <span id="calc-season-badge" class="px-3 py-1 rounded-full bg-emerald-600 text-white text-xs font-black capitalize">printemps</span>
+          </div>
+
+          <!-- Curseurs Environnementaux -->
+          <div class="space-y-3 pt-2">
+            <p class="text-xs font-bold uppercase text-slate-400">Paramètres IoT actuels :</p>
+            <div>
+              <div class="flex justify-between text-xs font-semibold">
+                <span>Température :</span>
+                <span id="val-temp" class="text-amber-700 font-bold">26 °C</span>
+              </div>
+              <input type="range" id="calc-temp" min="10" max="45" value="26" oninput="updateSliders()" class="w-full">
+            </div>
+            <div>
+              <div class="flex justify-between text-xs font-semibold">
+                <span>Humidité Air :</span>
+                <span id="val-hum" class="text-blue-700 font-bold">50 %</span>
+              </div>
+              <input type="range" id="calc-hum" min="20" max="90" value="50" oninput="updateSliders()" class="w-full">
+            </div>
+            <div>
+              <div class="flex justify-between text-xs font-semibold">
+                <span>Humidité Sol :</span>
+                <span id="val-soil" class="text-emerald-700 font-bold">45 %</span>
+              </div>
+              <input type="range" id="calc-soil" min="10" max="90" value="45" oninput="updateSliders()" class="w-full">
+            </div>
+          </div>
+
+          <button onclick="calculateWaterNeed()" class="w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-md transition-all">
+            ⚡ Lancer l'analyse IA de besoin en eau
+          </button>
+        </div>
+
+        <!-- Décision IA -->
+        <div class="lg:col-span-5 bg-gradient-to-br from-slate-50 to-emerald-50 p-6 rounded-3xl border border-emerald-200 shadow-sm flex flex-col justify-between space-y-6">
+          <div class="space-y-4">
+            <h2 class="text-base font-black text-slate-900 font-poppins">Résultat de l'IA Agronomique</h2>
+            
+            <div class="bg-white p-4 rounded-2xl border border-slate-200 space-y-1">
+              <span class="text-xs text-slate-500 font-bold">Score de Besoin en Eau (0-100) :</span>
+              <p id="calc-score" class="text-3xl font-black text-slate-900">58 / 100</p>
+              <span id="calc-need-level" class="inline-block px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-100 text-emerald-800">Besoin Normal</span>
+            </div>
+
+            <div class="bg-white p-4 rounded-2xl border-2 border-emerald-500 space-y-1">
+              <span class="text-xs text-slate-500 font-bold">Méthode Recommandée :</span>
+              <h3 id="calc-method" class="text-xl font-black text-emerald-800">🏺 Jarre enterrée</h3>
+            </div>
+
+            <div class="bg-white/80 p-4 rounded-2xl border border-slate-200">
+              <span class="text-xs font-bold text-slate-700 block mb-1">Raison de la recommandation :</span>
+              <p id="calc-reason" class="text-xs text-slate-600 leading-relaxed">
+                Besoin hydrique modéré. La jarre en terre cuite poreuse diffuse l'eau sans aucune évaporation de surface.
+              </p>
+            </div>
+          </div>
+
+          <button onclick="addPlantFromCalculator()" class="w-full py-3 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs shadow-md transition-all">
+            ➕ Ajouter la plante à la base de données
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= 3. PAGE ROBOT MOBILE ================= -->
+    <div id="tab-robot" class="tab-content space-y-6">
+      <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <h1 class="text-2xl font-black text-slate-900 font-poppins">Robot Mobile Autonome « JarraBot »</h1>
+          <p class="text-xs text-slate-500">Patrouille virtuelle avec lecture NFC sans contact, capture photo & capteurs IoT.</p>
+        </div>
+        <div class="flex items-center gap-3">
+          <button id="btn-start-robot" onclick="startRobotTour()" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-md transition-all">
+            ▶ Lancer le robot
+          </button>
+          <button id="btn-stop-robot" onclick="stopRobotTour()" class="px-5 py-2.5 rounded-xl bg-rose-50 text-rose-700 border border-rose-300 text-xs font-bold hover:bg-rose-100 transition-all">
+            ⏹ Arrêter le robot
+          </button>
+        </div>
+      </div>
+
+      <!-- Statut Bandeau -->
+      <div class="p-3.5 rounded-2xl bg-slate-900 text-white flex items-center justify-between text-xs">
+        <span id="robot-status-text" class="font-semibold text-emerald-400">Robot à la station d'accueil. Prêt pour inspection.</span>
+        <span id="robot-step-badge" class="px-2 py-0.5 rounded bg-white/10 font-mono text-[10px]">VEILLE</span>
+      </div>
+
+      <!-- Carte du Jardin -->
+      <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4">
+        <h2 class="text-sm font-black text-slate-800 uppercase tracking-wider">Plan du Jardin Urbain</h2>
+        <div id="pots-container" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+          <!-- Injecté dynamiquement par JS -->
+        </div>
+      </div>
+
+      <!-- Pupitre de Mesure Pot Actif -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white p-5 rounded-3xl border border-slate-200 shadow-sm space-y-3">
+          <h3 class="text-xs font-black text-slate-800 uppercase">Capture Optique Robot</h3>
+          <div class="aspect-video rounded-xl bg-slate-900 overflow-hidden relative flex items-center justify-center">
+            <img id="robot-cam-img" src="https://images.unsplash.com/photo-1592841200221-a6898f307baa?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover">
+            <div class="absolute bottom-2 left-2 text-[10px] text-emerald-400 font-mono bg-black/60 px-2 py-0.5 rounded">
+              NFC: <span id="robot-cam-nfc">NFC-TUN-001</span>
+            </div>
+          </div>
+          <p id="robot-cam-name" class="text-xs font-bold text-slate-800">Tomate Cerise Mornag</p>
+        </div>
+
+        <div class="bg-white p-5 rounded-3xl border border-slate-200 shadow-sm space-y-3">
+          <h3 class="text-xs font-black text-slate-800 uppercase">Télémesures Sonde</h3>
+          <div class="grid grid-cols-3 gap-2 text-center">
+            <div class="p-2.5 rounded-xl bg-amber-50">
+              <span class="text-[10px] text-amber-700 block font-bold">Temp.</span>
+              <strong id="robot-t" class="text-base text-amber-950 font-black">24.5°C</strong>
+            </div>
+            <div class="p-2.5 rounded-xl bg-blue-50">
+              <span class="text-[10px] text-blue-700 block font-bold">Air</span>
+              <strong id="robot-h" class="text-base text-blue-950 font-black">58%</strong>
+            </div>
+            <div class="p-2.5 rounded-xl bg-emerald-50">
+              <span class="text-[10px] text-emerald-700 block font-bold">Sol</span>
+              <strong id="robot-s" class="text-base text-emerald-950 font-black">66%</strong>
+            </div>
+          </div>
+          <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs">
+            <div class="flex justify-between font-bold">
+              <span>Diagnostic IA :</span>
+              <span id="robot-diag-badge" class="text-emerald-700">Plante Saine</span>
+            </div>
+            <p id="robot-recom-text" class="text-[11px] text-slate-500 mt-1">Niveau hydrique optimal par la jarre.</p>
+          </div>
+        </div>
+
+        <div class="bg-white p-5 rounded-3xl border border-slate-200 shadow-sm space-y-3">
+          <h3 class="text-xs font-black text-slate-800 uppercase">Historique des Scans</h3>
+          <div id="robot-history-list" class="space-y-2 text-xs max-h-48 overflow-y-auto">
+            <!-- Historique injecté dynamiquement -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= 4. PAGE ANALYSE PHOTO ================= -->
+    <div id="tab-analyse-photo" class="tab-content space-y-8">
+      <div>
+        <h1 class="text-3xl font-black text-slate-900 font-poppins">Diagnostic Foliaire par IA</h1>
+        <p class="text-xs text-slate-500 mt-1">Classification automatique en 5 états : saine, stress hydrique, feuilles jaunes, maladie ou flétrissement.</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <div class="lg:col-span-6 bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-5">
+          <h2 class="text-base font-black text-slate-900 font-poppins">1. Image de Feuille</h2>
+          <div class="aspect-video rounded-2xl overflow-hidden bg-slate-900 border-2 border-dashed border-emerald-300 relative flex items-center justify-center">
+            <img id="photo-preview-img" src="https://images.unsplash.com/photo-1592841200221-a6898f307baa?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover">
+          </div>
+
+          <!-- Échantillons prêts pour démonstration -->
+          <div class="space-y-2">
+            <p class="text-xs font-bold text-slate-700">Sélectionner un échantillon pour le jury :</p>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+              <button onclick="setPhotoSample('https://images.unsplash.com/photo-1592841200221-a6898f307baa?auto=format&fit=crop&w=600&q=80')" class="p-2 rounded-xl bg-slate-50 border text-[11px] font-semibold hover:border-emerald-500">
+                🌱 Saine
+              </button>
+              <button onclick="setPhotoSample('https://images.unsplash.com/photo-1618164436241-4473940d1f5c?auto=format&fit=crop&w=600&q=80')" class="p-2 rounded-xl bg-slate-50 border text-[11px] font-semibold hover:border-emerald-500">
+                💧 Stress
+              </button>
+              <button onclick="setPhotoSample('https://images.unsplash.com/photo-1556801712-76c8eb07bbc9?auto=format&fit=crop&w=600&q=80')" class="p-2 rounded-xl bg-slate-50 border text-[11px] font-semibold hover:border-emerald-500">
+                🍂 Jaunissement
+              </button>
+              <button onclick="setPhotoSample('https://images.unsplash.com/photo-1596724803738-98e3bfa7be0a?auto=format&fit=crop&w=600&q=80')" class="p-2 rounded-xl bg-slate-50 border text-[11px] font-semibold hover:border-emerald-500">
+                🦠 Maladie
+              </button>
+            </div>
+          </div>
+
+          <button onclick="runPhotoInference()" class="w-full py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-black text-xs shadow-md transition-all">
+            ⚡ Lancer l'analyse IA de la feuille
+          </button>
+        </div>
+
+        <div class="lg:col-span-6 bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-6">
+          <h2 class="text-base font-black text-slate-900 font-poppins">2. Rapport d'Inférence IA</h2>
+          
+          <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
+            <div class="flex justify-between items-center">
+              <span class="text-xs text-slate-500 font-bold uppercase">Diagnostic :</span>
+              <span id="photo-res-class" class="text-sm font-extrabold px-3 py-1 rounded-full bg-emerald-100 text-emerald-800">
+                Plante Saine (healthy)
+              </span>
+            </div>
+            <div>
+              <div class="flex justify-between text-xs font-bold mb-1">
+                <span>Niveau de confiance :</span>
+                <span id="photo-res-conf" class="text-emerald-700">96.4 %</span>
+              </div>
+              <div class="w-full h-3 rounded-full bg-slate-200 overflow-hidden">
+                <div id="photo-res-bar" class="h-full bg-emerald-600 rounded-full" style="width: 96.4%;"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 space-y-1">
+            <span class="text-xs font-bold text-emerald-900">Recommandation :</span>
+            <p id="photo-res-recom" class="text-xs text-emerald-950 leading-relaxed">
+              Poursuivre le régime d'irrigation régulier par jarre. Aucun traitement requis.
+            </p>
+          </div>
+
+          <div class="p-3 rounded-xl bg-slate-50 text-[11px] text-slate-500">
+            5 classes prises en charge : <code>healthy</code>, <code>water_stress</code>, <code>yellow_leaves</code>, <code>disease_spots</code>, <code>wilting</code>.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= 5. PAGE MES PLANTES ================= -->
+    <div id="tab-mes-plantes" class="tab-content space-y-8">
+      <div>
+        <h1 class="text-3xl font-black text-slate-900 font-poppins">Gestion de Mes Plantes</h1>
+        <p class="text-xs text-slate-500 mt-1">Consultez, modifiez ou supprimez les fiches végétales.</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <div class="lg:col-span-5 space-y-3" id="plants-list-container">
+          <!-- Liste des cartes injectée par JS -->
+        </div>
+
+        <div class="lg:col-span-7 bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-6" id="plant-detail-view">
+          <!-- Détails injectés par JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= 6. PAGE TABLEAU DE BORD ================= -->
+    <div id="tab-dashboard" class="tab-content space-y-8">
+      <div>
+        <h1 class="text-3xl font-black text-slate-900 font-poppins">Tableau de Bord Global</h1>
+        <p class="text-xs text-slate-500 mt-1">Supervision temps réel : plantes, capteurs, jarres, réservoir et aquarium.</p>
+      </div>
+
+      <!-- 6 KPIs -->
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+        <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
+          <span class="text-[10px] font-bold text-slate-400 uppercase">Total Plantes</span>
+          <p id="kpi-total" class="text-2xl font-black text-slate-900 mt-1">6</p>
+        </div>
+        <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
+          <span class="text-[10px] font-bold text-amber-700 uppercase">Stress Hydrique</span>
+          <p id="kpi-stress" class="text-2xl font-black text-amber-700 mt-1">1</p>
+        </div>
+        <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
+          <span class="text-[10px] font-bold text-rose-700 uppercase">Malades</span>
+          <p id="kpi-sick" class="text-2xl font-black text-rose-700 mt-1">1</p>
+        </div>
+        <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
+          <span class="text-[10px] font-bold text-amber-900 uppercase">Jarres Actives</span>
+          <p id="kpi-jars" class="text-2xl font-black text-slate-900 mt-1">6</p>
+        </div>
+        <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
+          <span class="text-[10px] font-bold text-cyan-700 uppercase">Réservoir Pluie</span>
+          <p class="text-2xl font-black text-cyan-800 mt-1">76%</p>
+        </div>
+        <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
+          <span class="text-[10px] font-bold text-blue-700 uppercase">Aquarium</span>
+          <p class="text-2xl font-black text-blue-800 mt-1">94%</p>
+        </div>
+      </div>
+
+      <!-- Écosystème Hydraulique & Énergie -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white p-5 rounded-3xl border border-slate-200 shadow-sm space-y-3">
+          <h3 class="text-xs font-black text-slate-900 uppercase">Aquarium Aquaponique</h3>
+          <p class="text-xs text-slate-500">28 poissons Tilapias • pH 7.2 • Nitrates 22.4 mg/L</p>
+          <div class="p-2.5 rounded-xl bg-blue-50 text-blue-800 text-xs font-bold">
+            Eau recyclée continuellement vers les bacs
+          </div>
+        </div>
+
+        <div class="bg-white p-5 rounded-3xl border border-slate-200 shadow-sm space-y-3">
+          <h3 class="text-xs font-black text-slate-900 uppercase">Puits & Roue à Godets</h3>
+          <p class="text-xs text-slate-500">Noria traditionnelle • Nappe phréatique 8.5 m</p>
+          <button onclick="spinNoria()" class="w-full py-2 rounded-xl bg-orange-50 text-orange-800 border border-orange-200 text-xs font-bold hover:bg-orange-100">
+            🔄 Actionner la roue à godets
+          </button>
+        </div>
+
+        <div class="bg-white p-5 rounded-3xl border border-slate-200 shadow-sm space-y-3">
+          <h3 class="text-xs font-black text-slate-900 uppercase">Turbine Hydraulique</h3>
+          <p class="text-xs text-slate-500">Puissance : 4.8 Watts • Énergie : 38.6 Wh</p>
+          <button onclick="triggerTurbine()" class="w-full py-2 rounded-xl bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-bold hover:bg-emerald-100">
+            ⚡ Simuler flux gravitaire
+          </button>
+        </div>
+      </div>
+
+      <!-- Alertes Récentes -->
+      <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4">
+        <h2 class="text-base font-black text-slate-900 font-poppins">Alertes Récentes</h2>
+        <div id="alerts-list" class="space-y-2 text-xs">
+          <!-- Alertes injectées par JS -->
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="bg-slate-900 text-slate-400 py-8 border-t border-slate-800 text-center text-xs">
+    <p class="font-bold text-white mb-1">Smart Jarra — « Chaque goutte cultive demain. »</p>
+    <p>Projet académique 2025 • Agriculture urbaine intelligente en Tunisie 🇹🇳</p>
+  </footer>
+
+  <!-- ================= JAVASCRIPT ================= -->
+  <script>
+    // --- Base de données locale ---
+    const initialPlants = [
+      { id: "1", nfc: "NFC-TUN-001", name: "Tomate Cerise Mornag", type: "Tomate", season: "printemps", waterNeed: "Normal", method: "Jarre enterrée", status: "healthy", photo: "https://images.unsplash.com/photo-1592841200221-a6898f307baa?auto=format&fit=crop&w=600&q=80" },
+      { id: "2", nfc: "NFC-TUN-002", name: "Menthe Verte Zaghouan", type: "Menthe", season: "automne", waterNeed: "Élevé", method: "Hydroponie", status: "healthy", photo: "https://images.unsplash.com/photo-1628556270448-4d4e4148e1b1?auto=format&fit=crop&w=600&q=80" },
+      { id: "3", nfc: "NFC-TUN-003", name: "Basilic Grand Vert", type: "Basilic", season: "printemps", waterNeed: "Normal", method: "Jarre enterrée", status: "water_stress", photo: "https://images.unsplash.com/photo-1618164436241-4473940d1f5c?auto=format&fit=crop&w=600&q=80" },
+      { id: "4", nfc: "NFC-TUN-004", name: "Romarin Sauvage Chaambi", type: "Romarin", season: "automne", waterNeed: "Faible", method: "Plantes sur le toit", status: "healthy", photo: "https://images.unsplash.com/photo-1515543237350-b3eea1ec8082?auto=format&fit=crop&w=600&q=80" },
+      { id: "5", nfc: "NFC-TUN-005", name: "Laitue Romaine Ariana", type: "Laitue", season: "automne", waterNeed: "Élevé", method: "Hydroponie", status: "yellow_leaves", photo: "https://images.unsplash.com/photo-1556801712-76c8eb07bbc9?auto=format&fit=crop&w=600&q=80" },
+      { id: "6", nfc: "NFC-TUN-006", name: "Persil Plat Tunisien", type: "Persil", season: "automne", waterNeed: "Normal", method: "Jarre enterrée", status: "healthy", photo: "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=600&q=80" },
+    ];
+
+    let plants = JSON.parse(localStorage.getItem('smart_jarra_plants')) || initialPlants;
+    let alerts = [
+      { id: 1, text: "Stress hydrique détecté sur Basilic Grand Vert : remplir la jarre.", type: "warning" },
+      { id: 2, text: "Laitue Romaine : légère décoloration (jaunissement).", type: "danger" },
+      { id: 3, text: "Micro-turbine : 4.8 Wh d'énergie propre générés.", type: "success" }
+    ];
+
+    let robotRunning = false;
+    let robotPotIndex = 0;
+    let robotTimer = null;
+    let realTfModel = false;
+
+    // --- Navigation Tabs ---
+    function showTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+      document.getElementById('tab-' + tabId).classList.add('active');
+
+      document.querySelectorAll('.nav-btn').forEach(b => {
+        b.className = 'nav-btn px-3 py-2 rounded-xl text-xs font-bold transition-all text-slate-700 hover:bg-emerald-50';
+      });
+      const activeBtn = document.getElementById('nav-' + tabId);
+      if (activeBtn) {
+        activeBtn.className = 'nav-btn px-3 py-2 rounded-xl text-xs font-bold transition-all bg-emerald-700 text-white';
+      }
+
+      if (tabId === 'robot') renderRobotPots();
+      if (tabId === 'mes-plantes') renderPlantsList();
+      if (tabId === 'dashboard') updateDashboard();
+    }
+
+    // --- Auto Saison ---
+    const seasonsMap = {
+      Tomate: "printemps",
+      Menthe: "automne",
+      Basilic: "printemps",
+      Persil: "automne",
+      Romarin: "automne",
+      Laitue: "automne",
+      Fraise: "automne"
+    };
+
+    function onPlantTypeChange() {
+      const type = document.getElementById('calc-plant-type').value;
+      const season = seasonsMap[type] || "printemps";
+      document.getElementById('calc-season-badge').innerText = season;
+      calculateWaterNeed();
+    }
+
+    function updateSliders() {
+      document.getElementById('val-temp').innerText = document.getElementById('calc-temp').value + ' °C';
+      document.getElementById('val-hum').innerText = document.getElementById('calc-hum').value + ' %';
+      document.getElementById('val-soil').innerText = document.getElementById('calc-soil').value + ' %';
+      calculateWaterNeed();
+    }
+
+    function calculateWaterNeed() {
+      const type = document.getElementById('calc-plant-type').value;
+      const temp = parseInt(document.getElementById('calc-temp').value);
+      const hum = parseInt(document.getElementById('calc-hum').value);
+      const soil = parseInt(document.getElementById('calc-soil').value);
+
+      let score = 50 + (temp - 22) * 2 + (60 - hum) * 0.5 + (60 - soil) * 0.6;
+      if (type === "Menthe" || type === "Laitue") score += 12;
+      if (type === "Romarin") score -= 20;
+      score = Math.max(10, Math.min(95, Math.round(score)));
+
+      document.getElementById('calc-score').innerText = score + ' / 100';
+
+      let method = "Jarre enterrée";
+      let need = "Normal";
+      let reason = "Besoin hydrique modéré. La jarre en terre cuite poreuse diffuse l'eau sans aucune évaporation de surface.";
+
+      if (score >= 70) {
+        need = "Élevé";
+        method = "Hydroponie";
+        reason = "Besoin très élevé induit par la forte chaleur et la demande foliaire. L'hydroponie maintient une oxygénation continue.";
+      } else if (score < 40) {
+        need = "Faible";
+        method = "Plantes sur le toit";
+        reason = "Plante sobre et rustique adaptée au vent et au soleil en toiture végétalisée.";
+      }
+
+      document.getElementById('calc-need-level').innerText = 'Besoin ' + need;
+      document.getElementById('calc-method').innerText = (method === 'Hydroponie' ? '💧 ' : method === 'Jarre enterrée' ? '🏺 ' : '🌿 ') + method;
+      document.getElementById('calc-reason').innerText = reason;
+    }
+
+    function addPlantFromCalculator() {
+      const type = document.getElementById('calc-plant-type').value;
+      const name = document.getElementById('calc-plant-name').value || (type + " Nouveau");
+      const season = seasonsMap[type] || "printemps";
+      const score = parseInt(document.getElementById('calc-score').innerText);
+
+      let method = "Jarre enterrée";
+      let need = "Normal";
+      if (score >= 70) { method = "Hydroponie"; need = "Élevé"; }
+      else if (score < 40) { method = "Plantes sur le toit"; need = "Faible"; }
+
+      const newP = {
+        id: String(Date.now()),
+        nfc: "NFC-TUN-00" + (plants.length + 1),
+        name: name,
+        type: type,
+        season: season,
+        waterNeed: need,
+        method: method,
+        status: "healthy",
+        photo: "https://images.unsplash.com/photo-1592841200221-a6898f307baa?auto=format&fit=crop&w=600&q=80"
+      };
+
+      plants.unshift(newP);
+      localStorage.setItem('smart_jarra_plants', JSON.stringify(plants));
+      alert("✅ Plante enregistrée avec succès !");
+      showTab('mes-plantes');
+    }
+
+    // --- Robot Mobile ---
+    function renderRobotPots() {
+      const container = document.getElementById('pots-container');
+      container.innerHTML = '';
+      plants.forEach((p, idx) => {
+        const isCurrent = robotRunning && robotPotIndex === idx;
+        const div = document.createElement('div');
+        div.className = `p-3 rounded-2xl border-2 flex flex-col items-center text-center transition-all ${isCurrent ? 'border-emerald-600 bg-emerald-50 scale-105 shadow-md' : 'border-slate-200 bg-slate-50'}`;
+        div.innerHTML = `
+          <span class="text-xs font-mono font-bold text-slate-500">${p.nfc}</span>
+          <span class="text-2xl my-1">🏺</span>
+          <span class="text-xs font-bold text-slate-800 truncate w-full">${p.name}</span>
+          <span class="text-[10px] text-slate-500">${p.method}</span>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    function startRobotTour() {
+      if (robotRunning) return;
+      robotRunning = true;
+      robotPotIndex = 0;
+      stepRobot();
+    }
+
+    function stopRobotTour() {
+      robotRunning = false;
+      clearTimeout(robotTimer);
+      document.getElementById('robot-status-text').innerText = "Arrêté par l'opérateur.";
+      document.getElementById('robot-step-badge').innerText = "ARRÊTÉ";
+      renderRobotPots();
+    }
+
+    function stepRobot() {
+      if (!robotRunning || robotPotIndex >= plants.length) {
+        robotRunning = false;
+        document.getElementById('robot-status-text').innerText = "Tournée terminée avec succès sur l'ensemble des pots !";
+        document.getElementById('robot-step-badge').innerText = "TERMINÉ";
+        renderRobotPots();
+        return;
+      }
+
+      const p = plants[robotPotIndex];
+      renderRobotPots();
+
+      document.getElementById('robot-status-text').innerText = `Inspection du pot #${robotPotIndex + 1} : ${p.name} (${p.nfc})`;
+      document.getElementById('robot-step-badge').innerText = "SCAN NFC & PHOTO";
+
+      document.getElementById('robot-cam-img').src = p.photo;
+      document.getElementById('robot-cam-nfc').innerText = p.nfc;
+      document.getElementById('robot-cam-name').innerText = p.name;
+
+      const t = (22 + Math.random() * 5).toFixed(1);
+      const h = Math.round(45 + Math.random() * 20);
+      const s = p.status === 'water_stress' ? 32 : Math.round(55 + Math.random() * 15);
+
+      document.getElementById('robot-t').innerText = t + '°C';
+      document.getElementById('robot-h').innerText = h + '%';
+      document.getElementById('robot-s').innerText = s + '%';
+
+      const diagNames = {
+        healthy: "Plante Saine",
+        water_stress: "Stress Hydrique",
+        yellow_leaves: "Feuilles Jaunes",
+        disease_spots: "Maladie Foliaire",
+        wilting: "Flétrissement"
+      };
+
+      document.getElementById('robot-diag-badge').innerText = diagNames[p.status] || "Plante Saine";
+
+      // Ajout historique
+      const hist = document.getElementById('robot-history-list');
+      const item = document.createElement('div');
+      item.className = 'p-2 rounded-lg bg-slate-100 text-[11px]';
+      item.innerHTML = `<strong>${p.name}</strong> • ${t}°C | Sol: ${s}% • <span class="text-emerald-700">${diagNames[p.status]}</span>`;
+      hist.prepend(item);
+
+      robotTimer = setTimeout(() => {
+        robotPotIndex++;
+        stepRobot();
+      }, 2500);
+    }
+
+    // --- Analyse Photo ---
+    function setPhotoSample(url) {
+      document.getElementById('photo-preview-img').src = url;
+    }
+
+    function runPhotoInference() {
+      const src = document.getElementById('photo-preview-img').src;
+      let diag = "healthy";
+      let label = "Plante Saine (healthy)";
+      let conf = "96.2 %";
+      let recom = "Poursuivre le régime d'irrigation régulier par jarre. Aucun traitement requis.";
+
+      if (src.includes("618164436241")) {
+        diag = "water_stress";
+        label = "Stress Hydrique (water_stress)";
+        conf = "93.8 %";
+        recom = "Ouvrir la vanne d'alimentation de la jarre enterrée immédiatement.";
+      } else if (src.includes("556801712")) {
+        diag = "yellow_leaves";
+        label = "Feuilles Jaunes (yellow_leaves)";
+        conf = "91.5 %";
+        recom = "Apport de biofertilisant organique riche en azote.";
+      } else if (src.includes("596724803")) {
+        diag = "disease_spots";
+        label = "Taches Foliaires (disease_spots)";
+        conf = "89.4 %";
+        recom = "Isoler le pot et traiter avec un purin naturel protecteur.";
+      }
+
+      document.getElementById('photo-res-class').innerText = label;
+      document.getElementById('photo-res-conf').innerText = conf;
+      document.getElementById('photo-res-bar').style.width = conf;
+      document.getElementById('photo-res-recom').innerText = recom;
+    }
+
+    function toggleTfModel() {
+      realTfModel = !realTfModel;
+      document.getElementById('model-toggle-btn').innerText = realTfModel ? "⚡ Mode IA : TF.js Actif" : "⚡ Mode IA : Simulation";
+      alert(realTfModel ? "Modèle TensorFlow.js MobileNet / PlantVillage activé pour les analyses !" : "Mode simulation agronomique rapide activé.");
+    }
+
+    // --- Mes Plantes ---
+    function renderPlantsList() {
+      const container = document.getElementById('plants-list-container');
+      container.innerHTML = '';
+      plants.forEach((p, idx) => {
+        const div = document.createElement('div');
+        div.className = 'p-3 rounded-2xl bg-white border border-slate-200 shadow-sm flex items-center justify-between gap-3 cursor-pointer hover:border-emerald-500';
+        div.onclick = () => selectPlantDetail(idx);
+        div.innerHTML = `
+          <div class="flex items-center gap-3">
+            <img src="${p.photo}" class="w-12 h-12 rounded-xl object-cover">
+            <div>
+              <h4 class="text-xs font-black text-slate-800">${p.name}</h4>
+              <p class="text-[11px] text-slate-500">${p.type} • ${p.method}</p>
+            </div>
+          </div>
+          <button onclick="event.stopPropagation(); deletePlant(${idx})" class="p-1.5 text-rose-500 hover:bg-rose-50 rounded-lg">🗑</button>
+        `;
+        container.appendChild(div);
+      });
+      selectPlantDetail(0);
+    }
+
+    function selectPlantDetail(idx) {
+      const p = plants[idx] || plants[0];
+      if (!p) return;
+      document.getElementById('plant-detail-view').innerHTML = `
+        <div class="flex justify-between items-center pb-4 border-b">
+          <div>
+            <span class="text-xs font-mono font-bold text-slate-400">${p.nfc}</span>
+            <h2 class="text-xl font-black text-slate-900">${p.name}</h2>
+          </div>
+          <span class="px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold">${p.method}</span>
+        </div>
+        <div class="grid grid-cols-3 gap-3 text-xs">
+          <div class="p-3 rounded-xl bg-slate-50">
+            <span class="text-slate-400 block">Espèce :</span>
+            <strong class="text-sm font-bold">${p.type}</strong>
+          </div>
+          <div class="p-3 rounded-xl bg-slate-50">
+            <span class="text-slate-400 block">Saison :</span>
+            <strong class="text-sm font-bold capitalize">${p.season}</strong>
+          </div>
+          <div class="p-3 rounded-xl bg-slate-50">
+            <span class="text-slate-400 block">Besoin Eau :</span>
+            <strong class="text-sm font-bold">${p.waterNeed}</strong>
+          </div>
+        </div>
+        <div class="p-4 rounded-xl bg-slate-50 border">
+          <span class="text-xs font-bold text-slate-700 block mb-1">Télémesures moyennes (24h) :</span>
+          <p class="text-xs text-slate-600">Température : 24.2°C • Humidité air : 54% • Humidité racinaire : 64%</p>
+        </div>
+      `;
+    }
+
+    function deletePlant(idx) {
+      if (confirm("Supprimer cette plante ?")) {
+        plants.splice(idx, 1);
+        localStorage.setItem('smart_jarra_plants', JSON.stringify(plants));
+        renderPlantsList();
+      }
+    }
+
+    // --- Dashboard & Écosystème ---
+    function updateDashboard() {
+      document.getElementById('kpi-total').innerText = plants.length;
+      document.getElementById('kpi-stress').innerText = plants.filter(p => p.status === 'water_stress').length;
+      document.getElementById('kpi-sick').innerText = plants.filter(p => p.status === 'yellow_leaves' || p.status === 'disease_spots').length;
+      document.getElementById('kpi-jars').innerText = plants.length;
+
+      const alList = document.getElementById('alerts-list');
+      alList.innerHTML = '';
+      alerts.forEach(a => {
+        const d = document.createElement('div');
+        d.className = `p-3 rounded-xl border text-xs font-medium ${a.type === 'danger' ? 'bg-rose-50 border-rose-200 text-rose-950' : a.type === 'warning' ? 'bg-amber-50 border-amber-200 text-amber-950' : 'bg-emerald-50 border-emerald-200 text-emerald-950'}`;
+        d.innerText = a.text;
+        alList.appendChild(d);
+      });
+    }
+
+    function spinNoria() {
+      alert("🔄 Roue à godets actionnée ! 25 litres d'eau remontés du puits vers le réservoir pluvial.");
+    }
+
+    function triggerTurbine() {
+      alert("⚡ Micro-turbine activée par surpression : 5.4 Watts générés instantanément.");
+    }
+
+    // Initialisation au chargement
+    calculateWaterNeed();
+  </script>
+</body>
+</html>

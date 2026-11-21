@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="EKRILNA — La marketplace tunisienne de location et colocation étudiante. Logements vérifiés, prix transparents, colocataires compatibles. Direct, clair, équitable." />
+  <meta name="keywords" content="location étudiant Tunis, colocation Tunisie, logement étudiant, EKRILNA, appartement Tunis" />
+  <meta property="og:title" content="EKRILNA — Trouve ton chez-toi à Tunis" />
+  <meta property="og:description" content="Marketplace tunisienne de location et colocation étudiante. Direct, Clair, Équitable." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#A63A12" />
+  <title>EKRILNA — Trouve ton chez-toi. Trouve tes colocataires.</title>
+
+  <!-- Preconnect fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/design-system.css" />
+  <link rel="stylesheet" href="css/loader.css" />
+  <link rel="stylesheet" href="css/sections.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+</head>
+
+<body class="loading">
+
+  <!-- ── Loader ──────────────────────────────────────────── -->
+  <div id="loader" role="status" aria-label="Chargement d'EKRILNA">
+    <div class="loader-logo">
+      <span class="loader-letter">E</span>
+      <span class="loader-letter">K</span>
+      <span class="loader-letter">R</span>
+      <span class="loader-letter accent">I</span>
+      <span class="loader-letter accent">L</span>
+      <span class="loader-letter">N</span>
+      <span class="loader-letter">A</span>
+      <div class="loader-sweep"></div>
+    </div>
+    <p class="loader-tagline">Direct · Clair · Équitable</p>
+    <div class="loader-progress">
+      <div class="loader-progress-fill"></div>
+    </div>
+  </div>
+
+  <!-- ── Custom Cursor ────────────────────────────────────── -->
+  <div id="cursor" aria-hidden="true"></div>
+  <div id="cursor-ring" aria-hidden="true"></div>
+
+  <!-- ── Navbar ───────────────────────────────────────────── -->
+  <nav id="navbar" role="navigation" aria-label="Navigation principale">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo" aria-label="EKRILNA — Accueil">
+        EKR<span>I</span>LNA
+      </a>
+
+      <ul class="nav-links" role="list">
+        <li><a href="#problem">Le Problème</a></li>
+        <li><a href="#solution">Solution</a></li>
+        <li><a href="#map-section">Carte</a></li>
+        <li><a href="#match">Match</a></li>
+        <li><a href="#testimonials">Avis</a></li>
+      </ul>
+
+      <div class="nav-cta">
+        <a href="#cta-final" class="nav-btn-login" id="nav-login-btn">Connexion</a>
+        <a href="#cta-final" class="nav-btn-signup" id="nav-signup-btn">Créer un compte</a>
+      </div>
+
+      <button class="nav-hamburger" aria-label="Menu" aria-expanded="false" id="hamburger-btn">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- SECTION 1 — HERO                                        -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <section id="hero" aria-label="Accueil EKRILNA">
+    <canvas id="hero-canvas" aria-hidden="true"></canvas>
+    <div class="hero-mobile-bg" aria-hidden="true"></div>
+    <div class="hero-overlay" aria-hidden="true"></div>
+
+    <div class="hero-content">
+      <div class="hero-badge" role="status">
+        <span class="dot" aria-hidden="true"></span>
+        🇹🇳 &nbsp;Marketplace étudiante tunisienne
+      </div>
+
+      <h1 class="hero-title">
+        Trouve ton chez-toi.<br />
+        Trouve tes colocataires.
+      </h1>
+
+      <p class="hero-subtitle">
+        <strong>EKRILNA</strong> — Direct&nbsp;·&nbsp;Clair&nbsp;·&nbsp;Équitable.
+      </p>
+
+      <div class="hero-ctas">
+        <a href="#map-section" class="btn btn-primary btn-lg" id="hero-cta-logement">
+          <i data-lucide="search" style="width:20px;height:20px"></i>
+          Chercher un logement
+        </a>
+        <a href="#match" class="btn btn-glass-light btn-lg" id="hero-cta-coloc">
+          <i data-lucide="users" style="width:20px;height:20px"></i>
+          Trouver un colocataire
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-scroll" aria-hidden="true">
+      <div class="scroll-indicator">
+        <span>Défiler</span>
+        <div class="arrow"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- SECTION 2 — LE PROBLÈME                                 -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <section id="problem" class="section" aria-labelledby="problem-heading">
+    <div class="problem-bg" aria-hidden="true"></div>
+
+    <div class="container">
+      <div class="problem-intro">
+        <span class="overline">La réalité du marché</span>
+        <h2 id="problem-heading">La galère étudiante,<br />on la connaît.</h2>
+        <p>Trouver un logement étudiant à Tunis, c'est un parcours du combattant. EKRILNA a été créé pour changer ça.</p>
+      </div>
+
+      <div class="problem-grid">
+        <div class="problem-card reveal">
+          <div class="problem-icon" aria-hidden="true">🔒</div>
+          <h4>« Déjà loué »</h4>
+          <p>Des annonces fantômes qui restent en ligne pendant des semaines après la location. Votre temps perdu.</p>
+        </div>
+
+        <div class="problem-card reveal">
+          <div class="problem-icon" aria-hidden="true">🎭</div>
+          <h4>Faux propriétaires</h4>
+          <p>Arnaques et intermédiaires non déclarés qui demandent des avances sans garanties. Votre argent à risque.</p>
+        </div>
+
+        <div class="problem-card reveal">
+          <div class="problem-icon" aria-hidden="true">🌫️</div>
+          <h4>Prix opaques</h4>
+          <p>Tarifs qui varient selon l'accent ou la région d'origine. Pas de référence, pas de comparaison possible.</p>
+        </div>
+
+        <div class="problem-card reveal">
+          <div class="problem-icon" aria-hidden="true">❓</div>
+          <h4>Colocataire inconnu</h4>
+          <p>Partager un appartement avec un parfait étranger, sans profil vérifié ni critères de compatibilité.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- SECTION 3 — LA SOLUTION EKRILNA                         -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <section id="solution" class="section" aria-labelledby="solution-heading">
+    <div class="container">
+      <div class="section-header">
+        <span class="overline">Notre réponse</span>
+        <h2 id="solution-heading">EKRILNA — La solution<br /><span class="text-gradient">complète et transparente.</span></h2>
+        <p class="body-lg" style="color:var(--c-text-soft);max-width:540px;margin:1rem auto 0;">
+          Une plateforme pensée par des étudiants, pour des étudiants. Six piliers pour une expérience sans friction.
+        </p>
+      </div>
+
+      <!-- Central brand card -->
+      <div class="solution-center-card reveal-scale">
+        <div class="solution-logo-mark" aria-hidden="true">E</div>
+        <h3 style="font-family:'Outfit',sans-serif;font-weight:900;margin-bottom:0.5rem;">EKR<span style="color:var(--c-terra)">I</span>LNA</h3>
+        <p style="color:var(--c-text-soft);">
+          La première marketplace tunisienne dédiée au logement étudiant, avec vérification, disponibilité réelle et mise en relation directe — sans commission cachée.
+        </p>
+        <div style="display:flex;gap:0.8rem;justify-content:center;flex-wrap:wrap;margin-top:1.5rem;">
+          <span class="badge badge-emerald">✓ Vérifié</span>
+          <span class="badge badge-terra">0% Commission</span>
+          <span class="badge badge-emerald">Disponible maintenant</span>
+        </div>
+      </div>
+
+      <!-- 6 Pillars -->
+      <div class="solution-grid">
+        <div class="pillar-card">
+          <div class="pillar-icon" aria-hidden="true">🛡️</div>
+          <h4>Vérification</h4>
+          <p>Propriétaires et étudiants vérifiés avec pièce d'identité. Zéro arnaque, garantie EKRILNA.</p>
+        </div>
+
+        <div class="pillar-card">
+          <div class="pillar-icon" aria-hidden="true">✅</div>
+          <h4>Disponibilité réelle</h4>
+          <p>Les annonces se mettent à jour en temps réel. Si c'est en ligne, c'est disponible — promis.</p>
+        </div>
+
+        <div class="pillar-card">
+          <div class="pillar-icon" aria-hidden="true">⚖️</div>
+          <h4>Juste prix</h4>
+          <p>Estimation du prix marché par quartier. Comparez, négociez en connaissance de cause.</p>
+        </div>
+
+        <div class="pillar-card">
+          <div class="pillar-icon" aria-hidden="true">🗺️</div>
+          <h4>Carte interactive</h4>
+          <p>Recherche par rayon autour de votre université, avec temps de trajet par mode de transport.</p>
+        </div>
+
+        <div class="pillar-card">
+          <div class="pillar-icon" aria-hidden="true">🤝</div>
+          <h4>EKRILNA Match</h4>
+          <p>Algorithme de compatibilité : budget, horaires, habitudes. Trouvez votre colocataire idéal.</p>
+        </div>
+
+        <div class="pillar-card">
+          <div class="pillar-icon" aria-hidden="true">💬</div>
+          <h4>Contact direct</h4>
+          <p>Messagerie intégrée sans intermédiaire. Contactez le propriétaire directement, sans frais.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- SECTION 4 — CARTE INTERACTIVE 3D                        -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <section id="map-section" aria-labelledby="map-heading">
+    <canvas id="map-canvas" aria-label="Carte 3D interactive de Tunis avec logements étudiants"></canvas>
+
+    <div class="map-overlay" aria-hidden="true"></div>
+
+    <!-- Header -->
+    <div class="map-ui map-header">
+      <span class="overline" style="color:rgba(255,255,255,0.55);display:block;margin-bottom:0.5rem;">Recherche géolocalisée</span>
+      <h2 id="map-heading" style="color:#fff;">Explore les logements<br />autour de ton campus.</h2>
+      <p>Carte 3D interactive de Tunis — ajuste le rayon et choisis ton mode de transport.</p>
+    </div>
+
+    <!-- Controls -->
+    <div class="map-ui map-controls">
+      <div class="map-controls-inner">
+        <!-- Radius -->
+        <div class="map-controls-row">
+          <span class="map-controls-label">Rayon</span>
+          <input
+            type="range"
+            id="radius-slider"
+            class="map-radius-slider"
+            min="2"
+            max="18"
+            value="6"
+            step="0.5"
+            aria-label="Rayon de recherche en kilomètres"
+          />
+          <span class="map-radius-value" id="radius-label">4.0 km</span>
+        </div>
+
+        <!-- Transport mode -->
+        <div class="map-controls-row">
+          <span class="map-controls-label">Transport</span>
+          <div class="transport-btns" role="group" aria-label="Mode de transport">
+            <button class="transport-btn active" data-transport="pied" id="btn-pied">
+              🚶 À pied
+            </button>
+            <button class="transport-btn" data-transport="metro" id="btn-metro">
+              🚇 Métro
+            </button>
+            <button class="transport-btn" data-transport="bus" id="btn-bus">
+              🚌 Bus
+            </button>
+            <button class="transport-btn" data-transport="voiture" id="btn-voiture">
+              🚗 Voiture
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- SECTION 5 — EKRILNA MATCH                               -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <section id="match" class="section" aria-labelledby="match-heading">
+    <div class="match-glow" aria-hidden="true"></div>
+
+    <div class="container">
+      <div class="match-layout">
+
+        <!-- Profile A -->
+        <div class="profile-card reveal-left">
+          <div class="profile-avatar" style="background:linear-gradient(135deg,#a63a12,#c94e1e);">
+            AY
+          </div>
+          <div class="profile-name">Aymen B.</div>
+          <div class="profile-info">Étudiant · Ingénierie · ENSI</div>
+          <div class="profile-tags">
+            <span class="chip">💰 450–600 DT</span>
+            <span class="chip">🌙 Couche-tard</span>
+            <span class="chip">🚭 Non-fumeur</span>
+            <span class="chip">🐾 Pas d'animaux</span>
+            <span class="chip">🧹 Propre</span>
+          </div>
+        </div>
+
+        <!-- Phone mockup (center) -->
+        <div class="phone-mockup" aria-label="Application EKRILNA Match — score de compatibilité 92%">
+          <div class="phone-frame">
+            <div class="phone-notch" aria-hidden="true"></div>
+            <div class="phone-screen">
+              <div class="phone-header">EKRILNA Match</div>
+
+              <!-- Score Ring -->
+              <div class="score-ring-wrap">
+                <svg class="score-ring-svg" viewBox="0 0 100 100" aria-label="Score de compatibilité">
+                  <defs>
+                    <linearGradient id="scoreGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" style="stop-color:#a63a12"/>
+                      <stop offset="100%" style="stop-color:#2d9b6f"/>
+                    </linearGradient>
+                  </defs>
+                  <circle class="score-ring-bg" cx="50" cy="50" r="40"/>
+                  <circle class="score-ring-fill" cx="50" cy="50" r="40"/>
+                  <text class="score-number" x="50" y="46">0%</text>
+                  <text class="score-label" x="50" y="60">COMPATIBILITÉ</text>
+                </svg>
+              </div>
+
+              <!-- Chips -->
+              <div class="phone-chips">
+                <span class="phone-chip">💰 Budget ✓</span>
+                <span class="phone-chip">🌙 Horaires ✓</span>
+                <span class="phone-chip">🚭 Fumeur ✓</span>
+                <span class="phone-chip">🧹 Propreté ✓</span>
+                <span class="phone-chip">🐾 Animaux ✓</span>
+              </div>
+
+              <div style="text-align:center;margin-top:auto;padding-top:0.6rem;">
+                <div style="background:linear-gradient(135deg,#a63a12,#2d9b6f);border-radius:20px;padding:0.5rem 1rem;display:inline-block;font-family:'Outfit',sans-serif;font-size:0.65rem;font-weight:700;color:#fff;letter-spacing:0.04em;">
+                  Proposer une coloc →
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Profile B -->
+        <div class="profile-card reveal-right">
+          <div class="profile-avatar" style="background:linear-gradient(135deg,#2d9b6f,#3ac48a);">
+            SB
+          </div>
+          <div class="profile-name">Salma Ch.</div>
+          <div class="profile-info">Étudiante · Médecine · FS de Tunis</div>
+          <div class="profile-tags">
+            <span class="chip">💰 400–580 DT</span>
+            <span class="chip">🌅 Lève-tôt</span>
+            <span class="chip">🚭 Non-fumeuse</span>
+            <span class="chip">🐾 Pas d'animaux</span>
+            <span class="chip">🧹 Très propre</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Info text below -->
+      <div class="match-info" style="margin-top:4rem;text-align:center;">
+        <h2 id="match-heading">EKRILNA Match —<br /><span class="text-gradient">Le bon colocataire.</span></h2>
+        <p style="color:rgba(255,255,255,0.6);max-width:480px;margin:1rem auto 2rem;">
+          Notre algorithme analyse budget, mode de vie, horaires et habitudes pour vous proposer des profils ultra-compatibles. Fini les mauvaises surprises.
+        </p>
+        <a href="#cta-final" class="btn btn-primary btn-lg" id="match-cta-btn">
+          Trouver mon match <i data-lucide="arrow-right" style="width:18px;height:18px"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- SECTION 6 — VISUALISATION 3D LOGEMENT                   -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <section id="viz3d" class="section" aria-labelledby="viz3d-heading">
+    <div class="container">
+      <div class="viz-layout">
+        <div class="viz-text">
+          <span class="overline" style="color:var(--c-terra);">Technologie exclusive</span>
+          <h2 id="viz3d-heading">Visite ton futur logement <span class="text-gradient">avant d'y aller.</span></h2>
+          <p>Explorez chaque pièce en 3D interactive depuis votre navigateur. Aucune application à télécharger.</p>
+          <ul style="display:flex;flex-direction:column;gap:0.8rem;margin-bottom:1.5rem;">
+            <li style="display:flex;align-items:center;gap:0.6rem;color:var(--c-text-soft);">
+              <span style="color:var(--c-emerald);font-size:1.1rem;">✓</span> Maquette 3D de chaque appartement
+            </li>
+            <li style="display:flex;align-items:center;gap:0.6rem;color:var(--c-text-soft);">
+              <span style="color:var(--c-emerald);font-size:1.1rem;">✓</span> Surfaces et disposition des pièces
+            </li>
+            <li style="display:flex;align-items:center;gap:0.6rem;color:var(--c-text-soft);">
+              <span style="color:var(--c-emerald);font-size:1.1rem;">✓</span> Rotation libre à 360°
+            </li>
+          </ul>
+          <div class="viz-hint" aria-label="Instruction d'interaction">
+            <i data-lucide="mouse-pointer-2" style="width:16px;height:16px;color:var(--c-terra)"></i>
+            Glissez pour faire pivoter · Molette pour zoomer
+          </div>
+        </div>
+
+        <div>
+          <canvas id="apt-canvas" aria-label="Maquette 3D interactive d'un appartement étudiant à Tunis"></canvas>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- SECTION 7 — ÉCOSYSTÈME PARTENAIRES                      -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <section id="partners" class="section" aria-labelledby="partners-heading">
+    <div class="container">
+      <div class="section-header">
+        <span class="overline" style="color:rgba(255,255,255,0.5);">Réservé aux membres</span>
+        <h2 id="partners-heading" style="color:#fff;">L'écosystème EKRILNA —<br /><span class="text-gradient">des avantages exclusifs.</span></h2>
+        <p style="color:rgba(255,255,255,0.5);">En tant que membre EKRILNA, bénéficiez de codes promo exclusifs chez nos partenaires sélectionnés.</p>
+      </div>
+
+      <!-- 3D Carousel -->
+      <div class="carousel-3d" role="region" aria-label="Carrousel de partenaires EKRILNA" aria-roledescription="carousel">
+        <div class="carousel-3d-inner">
+
+          <div class="partner-card" role="group" aria-roledescription="slide" aria-label="Partenaire UCO Tunis">
+            <div class="partner-logo" aria-hidden="true">🎓</div>
+            <div class="partner-name">UCO Tunis</div>
+            <div class="partner-type">Université partenaire</div>
+            <p style="font-size:0.82rem;color:rgba(255,255,255,0.45);text-align:center;">Accréditation de logements proches du campus</p>
+            <div class="partner-promo">EKRILNA-UCO15</div>
+          </div>
+
+          <div class="partner-card" role="group" aria-roledescription="slide" aria-label="Partenaire Le Kiosque Restaurant">
+            <div class="partner-logo" aria-hidden="true">🍽️</div>
+            <div class="partner-name">Le Kiosque</div>
+            <div class="partner-type">Restaurant étudiant</div>
+            <p style="font-size:0.82rem;color:rgba(255,255,255,0.45);text-align:center;">Repas complets à prix étudiant, livraison incluse</p>
+            <div class="partner-promo">KIOSKETU20</div>
+          </div>
+
+          <div class="partner-card" role="group" aria-roledescription="slide" aria-label="Partenaire FitZone Salle de sport">
+            <div class="partner-logo" aria-hidden="true">💪</div>
+            <div class="partner-name">FitZone</div>
+            <div class="partner-type">Salle de sport</div>
+            <p style="font-size:0.82rem;color:rgba(255,255,255,0.45);text-align:center;">3 mois offerts sur l'abonnement annuel étudiant</p>
+            <div class="partner-promo">FITEKU3M</div>
+          </div>
+
+          <div class="partner-card" role="group" aria-roledescription="slide" aria-label="Partenaire CleanHome Service de ménage">
+            <div class="partner-logo" aria-hidden="true">🏠</div>
+            <div class="partner-name">CleanHome</div>
+            <div class="partner-type">Service de ménage</div>
+            <p style="font-size:0.82rem;color:rgba(255,255,255,0.45);text-align:center;">Première session de ménage offerte pour les membres</p>
+            <div class="partner-promo">CLEAN1ST</div>
+          </div>
+
+          <div class="partner-card" role="group" aria-roledescription="slide" aria-label="Partenaire Café L'Étudiant">
+            <div class="partner-logo" aria-hidden="true">☕</div>
+            <div class="partner-name">Café L'Étudiant</div>
+            <div class="partner-type">Café & co-working</div>
+            <p style="font-size:0.82rem;color:rgba(255,255,255,0.45);text-align:center;">Café offert à chaque session de co-working</p>
+            <div class="partner-promo">CAFETU1</div>
+          </div>
+
+          <div class="partner-card" role="group" aria-roledescription="slide" aria-label="Partenaire LibraTech librairie">
+            <div class="partner-logo" aria-hidden="true">📚</div>
+            <div class="partner-name">LibraTech</div>
+            <div class="partner-type">Librairie universitaire</div>
+            <p style="font-size:0.82rem;color:rgba(255,255,255,0.45);text-align:center;">15% sur tous les ouvrages universitaires</p>
+            <div class="partner-promo">LIBRAEKU15</div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Carousel Controls -->
+      <div class="carousel-controls" aria-label="Contrôles du carrousel">
+        <button class="carousel-btn carousel-btn-prev" aria-label="Carte précédente" id="prev-partner-btn">
+          <i data-lucide="chevron-left" style="width:20px;height:20px"></i>
+        </button>
+        <div class="carousel-dots" role="tablist" aria-label="Navigation carrousel"></div>
+        <button class="carousel-btn carousel-btn-next" aria-label="Carte suivante" id="next-partner-btn">
+          <i data-lucide="chevron-right" style="width:20px;height:20px"></i>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- SECTION 8 — TÉMOIGNAGES                                 -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <section id="testimonials" class="section" aria-labelledby="testimonials-heading">
+    <div class="container">
+      <div class="section-header">
+        <span class="overline">Ce qu'ils en disent</span>
+        <h2 id="testimonials-heading">La communauté EKRILNA<br /><span class="text-gradient">parle d'elle-même.</span></h2>
+      </div>
+
+      <div class="testi-grid">
+
+        <!-- Témoignage 1 -->
+        <div class="testi-card">
+          <div class="testi-quote" aria-hidden="true">"</div>
+          <p class="testi-text">
+            "J'ai trouvé mon appartement à Lafayette en moins de 48h. Le propriétaire était vérifié, le prix était juste, et j'ai pu visiter en 3D avant de signer. EKRILNA a changé ma rentrée."
+          </p>
+          <div class="stars" aria-label="5 étoiles sur 5">
+            <svg class="star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg class="star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg class="star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg class="star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg class="star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <div class="testi-author">
+            <div class="testi-avatar" style="background:linear-gradient(135deg,#a63a12,#c94e1e);">MB</div>
+            <div>
+              <div class="testi-name">Mohamed Ben Amor</div>
+              <div class="testi-role">Étudiant en droit · Tunis</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Témoignage 2 -->
+        <div class="testi-card">
+          <div class="testi-quote" aria-hidden="true">"</div>
+          <p class="testi-text">
+            "EKRILNA Match m'a mis en contact avec ma colocataire parfaite. Même budget, mêmes horaires, même seuil de tolérance pour la propreté. On est amies maintenant. Merci !"
+          </p>
+          <div class="stars" aria-label="5 étoiles sur 5">
+            <svg class="star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg class="star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg class="star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg class="star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg class="star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <div class="testi-author">
+            <div class="testi-avatar" style="background:linear-gradient(135deg,#2d9b6f,#3ac48a);">IS</div>
+            <div>
+              <div class="testi-name">Ines Slimane</div>
+              <div class="testi-role">Étudiante en médecine · Sousse</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Témoignage 3 -->
+        <div class="testi-card">
+          <div class="testi-quote" aria-hidden="true">"</div>
+          <p class="testi-text">
+            "En tant que propriétaire, j'avais du mal à trouver des locataires sérieux. Depuis EKRILNA, tous mes locataires sont vérifiés. Mon appartement est loué en 3 jours en moyenne."
+          </p>
+          <div class="stars" aria-label="5 étoiles sur 5">
+            <svg class="star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg class="star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg class="star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg class="star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg class="star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <div class="testi-author">
+            <div class="testi-avatar" style="background:linear-gradient(135deg,#4a3fbe,#6c5ce7);">KT</div>
+            <div>
+              <div class="testi-name">Khalil Trabelsi</div>
+              <div class="testi-role">Propriétaire · Menzah VI</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Trust badges -->
+      <div class="trust-badges" role="list" aria-label="Indicateurs de confiance">
+        <div class="trust-badge" role="listitem">
+          <span class="icon" aria-hidden="true">🛡️</span>
+          <div>
+            <strong>100%</strong>
+            <span>Profils vérifiés</span>
+          </div>
+        </div>
+        <div class="trust-badge" role="listitem">
+          <span class="icon" aria-hidden="true">⚡</span>
+          <div>
+            <strong>&lt; 48h</strong>
+            <span>Délai moyen de location</span>
+          </div>
+        </div>
+        <div class="trust-badge" role="listitem">
+          <span class="icon" aria-hidden="true">💰</span>
+          <div>
+            <strong>0 DT</strong>
+            <span>Commission cachée</span>
+          </div>
+        </div>
+        <div class="trust-badge" role="listitem">
+          <span class="icon" aria-hidden="true">⭐</span>
+          <div>
+            <strong>4.9/5</strong>
+            <span>Note moyenne</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- SECTION 9 — CTA FINAL                                   -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <section id="cta-final" aria-labelledby="cta-final-heading">
+    <canvas id="cta-canvas" aria-hidden="true"></canvas>
+    <div class="cta-overlay" aria-hidden="true"></div>
+
+    <div class="cta-content">
+      <!-- Stats -->
+      <div class="cta-stats" role="list" aria-label="Statistiques EKRILNA">
+        <div role="listitem">
+          <div class="cta-stat-num" data-count="3200" data-suffix="+" id="stat-logements" aria-label="3200+ logements">0</div>
+          <div class="cta-stat-label">Logements listés</div>
+        </div>
+        <div role="listitem">
+          <div class="cta-stat-num" data-count="12000" data-suffix="+" id="stat-etudiants" aria-label="12000+ étudiants">0</div>
+          <div class="cta-stat-label">Étudiants inscrits</div>
+        </div>
+        <div role="listitem">
+          <div class="cta-stat-num" data-count="98" data-suffix="%" id="stat-satisfaction" aria-label="98% satisfaction">0</div>
+          <div class="cta-stat-label">Taux de satisfaction</div>
+        </div>
+      </div>
+
+      <h2 id="cta-final-heading">Prêt à trouver<br />ton chez-toi ?</h2>
+      <p>Rejoins des milliers d'étudiants qui ont déjà trouvé leur logement idéal avec EKRILNA.</p>
+
+      <a href="#" class="cta-main-btn" id="cta-final-btn" role="button">
+        Créer mon compte gratuitement ✨
+      </a>
+
+      <p style="margin-top:1.5rem;font-size:0.82rem;color:rgba(255,255,255,0.35);">
+        Inscription gratuite · Aucune carte bancaire requise
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- FOOTER                                                  -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <footer role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-logo">EKR<span>I</span>LNA</div>
+
+      <nav class="footer-links" aria-label="Liens footer">
+        <a href="#">À propos</a>
+        <a href="#">Propriétaires</a>
+        <a href="#">Blog</a>
+        <a href="#">Aide</a>
+        <a href="#">Confidentialité</a>
+        <a href="#">CGU</a>
+      </nav>
+
+      <div class="lang-selector" role="group" aria-label="Sélecteur de langue">
+        <button class="lang-btn active" aria-pressed="true" id="lang-fr">FR</button>
+        <button class="lang-btn" aria-pressed="false" id="lang-ar">AR</button>
+        <button class="lang-btn" aria-pressed="false" id="lang-en">EN</button>
+      </div>
+
+      <p class="footer-copy">© 2024 EKRILNA · Tous droits réservés · Tunisie 🇹🇳</p>
+    </div>
+  </footer>
+
+  <!-- ── Scripts ──────────────────────────────────────────── -->
+  <!-- Three.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <!-- GSAP + ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <!-- App scripts -->
+  <script src="js/loader.js"></script>
+  <script src="js/hero3d.js"></script>
+  <script src="js/map3d.js"></script>
+  <script src="js/match.js"></script>
+  <script src="js/carousel3d.js"></script>
+  <script src="js/scrollAnimations.js"></script>
+  <script src="js/interactions.js"></script>
+
+  <!-- Init Lucide icons -->
+  <script>
+    if (typeof lucide !== 'undefined') {
+      lucide.createIcons();
+    }
+  </script>
+</body>
+</html>
