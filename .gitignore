@@ -8,6 +8,7 @@ node_modules/
 out/
 build/
 dist/
+*.tsbuildinfo
 
 # Logs
 npm-debug.log*
@@ -28,3 +29,4 @@ yarn-error.log*
 *.sw?
 .DS_Store
 Thumbs.db
+
