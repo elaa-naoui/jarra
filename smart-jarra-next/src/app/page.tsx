@@ -18,7 +18,7 @@ import {
   Sparkles,
   ExternalLink,
 } from "lucide-react";
-import { CinematicAnimation } from "@/components/CinematicAnimation";
+import { ScrollRevealEcosystem } from "@/components/ScrollRevealEcosystem";
 import { RobotPatrolAnimation } from "@/components/RobotPatrolAnimation";
 
 export default function HomePage() {
@@ -175,12 +175,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* SECTION CINÉMATIQUE 1 : Animation 3D 20s de l'Écosystème */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
-        <CinematicAnimation />
-      </section>
+      {/* SECTION : Apparition progressive de l'Écosystème Smart Jarra au scroll */}
+      <ScrollRevealEcosystem />
 
-      {/* SECTION CINÉMATIQUE 2 : Animation 3D 15s du Robot Smart Jarra Scout */}
+      {/* SECTION CINÉMATIQUE : Animation 3D 15s du Robot Smart Jarra Scout */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
         <RobotPatrolAnimation />
       </section>
